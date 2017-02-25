@@ -1,0 +1,42 @@
+.menu-w {
+  background-color: #039BE5;
+  width: 100%;
+  height: 50px;
+}
+
+.travis-badge{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.menu-l{
+  text-align: center;
+  padding: 0 0 0 120px;
+  margin: 0 0 0 -120px;
+  list-style: none;
+
+}
+
+.menu-i {
+  padding: 0;
+  max-height: 50px;
+  display: inline-block;
+}
+
+.menu-ia {
+  max-height: 50px;
+  padding: 1rem;
+  font-size: 1.25rem;
+  color: #FFF;
+  text-decoration: none;
+  display: block;
+}
+
+.menu-ia:hover{
+  background-color: #0277BD;
+}
+
+.menu-ia--active{
+  background-color: #0288D1;
+}

@@ -1,0 +1,21 @@
+.trd-head{
+  width: 100%;
+  text-align: center;
+}
+
+.trd-head input{
+  width: 100%;
+  margin: auto;
+  padding: 0 1rem;
+  line-height: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  box-shadow: none;
+  background-color: none;
+  border: none;
+  outline:none;
+}
+
+.trd-head input:focus{
+  border: 1px solid #039BE5;
+}

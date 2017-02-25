@@ -1,0 +1,28 @@
+.trd-i{
+  color: #666;
+  margin: 0 0 0.25rem 0;
+  padding: 0 1rem;
+  background-color: #fff;
+  height: 4rem;
+}
+
+.trd-ia{
+  text-decoration: none;
+  line-height: 4rem;
+  color: #666;
+}
+
+.trd-ia:hover{
+  color: #0288D1;
+}
+
+.trd-ii{
+  line-height: 4rem;
+  display: block;
+  float: right;
+  width: 5rem;
+}
+
+.trd-ii--last{
+  width: 7rem;
+}
