@@ -10,8 +10,6 @@ const { Column } = Grid;
 const {
   Header: CardHeader,
   Content: CardContent,
-  Meta: CardMeta,
-  Description: CardDescription
 } = Card;
 
 export const ItemComponent = ({ skyscraper }) => (
