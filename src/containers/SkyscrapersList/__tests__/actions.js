@@ -3,13 +3,13 @@ import {
   ajaxSearchStart,
   ajaxSearchEnd,
   ajaxSearchFail,
-} from './actions';
+} from '../actions';
 import {
   CHANGE_SEARCH_TXT,
   AJAX_SEARCH_START,
   AJAX_SEARCH_END,
   AJAX_SEARCH_FAIL,
-} from './constants';
+} from '../constants';
 
 const actionsMap = {
   changeSearchTxt: {
