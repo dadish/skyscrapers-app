@@ -12,7 +12,7 @@ const loadModule = (cb) => (componentModule) => {
 export default function createRoutes(store) {
   // create reusable async injectors using getAsyncInjectors factory
 
-  const { injectReducer } = getAsyncInjectors(store);
+  const { injectReducer, injectEpic } = getAsyncInjectors(store);
 
   return [
     {
@@ -21,9 +21,11 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         require.ensure([
           'containers/SkyscrapersList/reducer',
+          'containers/SkyscrapersList/epic',
           'containers/HomePage'
         ], (require) => {
           const renderRoute = loadModule(cb);
+          injectEpic('skyscrapers', require('containers/SkyscrapersList/epic').default);
           injectReducer('skyscrapers', require('containers/SkyscrapersList/reducer').default);
           renderRoute(require('containers/HomePage'));
         })
