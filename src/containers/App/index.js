@@ -8,6 +8,7 @@ import { fromJS } from 'immutable';
 import configureStore from 'setup/store';
 import { makeSelectLocationState } from 'setup/selectors';
 import createRoutes from 'setup/routes';
+import 'semantic-ui-css/semantic.css';
 import 'setup/index.css';
 import './style.css';
 
