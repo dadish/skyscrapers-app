@@ -14,9 +14,7 @@ export const ItemComponent = ({ skyscraper }) => (
   <Card>
     <Image fluid src="http://placehold.it/200/" alt={skyscraper.get('title')} />
     <CardContent>
-      <CardHeader>
-        <a href={skyscraper.get('url')}>{skyscraper.get('title')}</a>
-      </CardHeader>
+      <CardHeader>{skyscraper.get('title')}</CardHeader>
     </CardContent>
     <CardContent extra>
       <Statistic value={skyscraper.get('floors')} label="floors" size="mini"/>
