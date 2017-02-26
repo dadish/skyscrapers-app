@@ -1,0 +1,1 @@
+export const selectSkyscrapers = () => state => state.get('skyscrapers');
