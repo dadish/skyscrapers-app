@@ -596,7 +596,7 @@ export const initialState = new List([
     "floors": 22,
     "images": []
   }
-]);
+].map(item => new Map(item)));
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;

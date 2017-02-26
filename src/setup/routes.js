@@ -3,6 +3,8 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 
+import { getAsyncInjectors } from 'utils/asyncInjectors';
+
 const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
@@ -10,17 +12,20 @@ const loadModule = (cb) => (componentModule) => {
 export default function createRoutes(store) {
   // create reusable async injectors using getAsyncInjectors factory
 
+  const { injectReducer } = getAsyncInjectors(store);
+
   return [
     {
       path: '/',
       name: 'home',
       getComponent(nextState, cb) {
         require.ensure([
+          'containers/SkyscrapersList/reducer',
           'containers/HomePage'
         ], (require) => {
           const renderRoute = loadModule(cb);
-          const component = require('containers/HomePage');
-          renderRoute(component);
+          injectReducer('skyscrapers', require('containers/SkyscrapersList/reducer').default);
+          renderRoute(require('containers/HomePage'));
         })
       },
     }, {

@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import listReducer from './List/reducer';
+import listReducer, { initialState as initialListState } from './List/reducer';
 import {
   AJAX_SEARCH_START,
   AJAX_SEARCH_END,
@@ -7,11 +7,12 @@ import {
 } from './constants';
 
 export const initialState = fromJS({
-  list: [],
+  list: initialListState,
   loading: false,
 });
 
 const reducer = (state = initialState, action) => {
+  console.log(state.toJS());
   const { type } = action;
   switch (type) {
     case AJAX_SEARCH_START:

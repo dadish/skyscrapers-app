@@ -1,7 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectList } from './selectors';
 
-export const ListComponent = () => (
-  <h1>Skyscrapers List!</h1>
+export const ListComponent = ({ list }) => (
+  <ul>
+    {list.map(item => <li>{item.get('title')}</li>)}
+  </ul>
 );
 
-export default ListComponent;
+const mapStateToProps = createStructuredSelector({
+  list: selectList(),
+});
+
+export default connect(mapStateToProps)(ListComponent);
