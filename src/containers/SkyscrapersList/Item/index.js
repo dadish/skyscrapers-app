@@ -1,24 +1,33 @@
 import React from 'react';
 import {
   Grid,
-  Segment,
+  Card,
   Image,
-  Header,
-  Divider,
   Statistic,
 } from 'semantic-ui-react';
 
 const { Column } = Grid;
+const {
+  Header: CardHeader,
+  Content: CardContent,
+  Meta: CardMeta,
+  Description: CardDescription
+} = Card;
 
 export const ItemComponent = ({ skyscraper }) => (
   <Column>
-    <Segment>
+    <Card>
       <Image fluid src="http://placehold.it/200/" alt={skyscraper.get('title')} />
-      <Header as="h4"><a href={skyscraper.get('url')}>{skyscraper.get('title')}</a></Header>
-      <Divider />
-      <Statistic value={skyscraper.get('floors')} label="floors" size="mini"/>
-      <Statistic value={skyscraper.get('height')} label="height" size="mini"/>
-    </Segment>
+      <CardContent>
+        <CardHeader>
+          <a href={skyscraper.get('url')}>{skyscraper.get('title')}</a>
+        </CardHeader>
+      </CardContent>
+      <CardContent extra>
+        <Statistic value={skyscraper.get('floors')} label="floors" size="mini"/>
+        <Statistic value={skyscraper.get('height')} label="height" size="mini"/>
+      </CardContent>
+    </Card>
   </Column>
 );
 
