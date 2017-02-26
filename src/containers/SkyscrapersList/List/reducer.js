@@ -602,7 +602,7 @@ const reducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case AJAX_SEARCH_END:
-      return new List(payload.map(item => new Map(item)));
+      return new List(payload.data.skyscraper.list.map(item => new Map(item)));
     default:
       return state;
   }

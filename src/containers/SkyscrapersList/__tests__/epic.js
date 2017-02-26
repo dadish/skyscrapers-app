@@ -32,12 +32,17 @@ test('SkyscrapersListEpic debounces actions and emits only the last one', () => 
   action$.next(changeSearchTxt('foo'));
   expect(consumer.mock.calls.length).toBe(0);
   jest.runAllTimers();
-  console.log(consumer.mock.calls);
   expect(consumer.mock.calls.length).toBeGreaterThan(0);
 });
 
 test('SkyscrapersListEpic does not react to every action', () => {
   action$.next({ type: 'everyActionType' });
+  jest.runAllTimers();
+  expect(consumer.mock.calls.length).toBe(0);
+});
+
+test('SkyscrapersListEpic does not react to CHANGE_SEARCH_TXT actions with empty payload', () => {
+  action$.next(changeSearchTxt());
   jest.runAllTimers();
   expect(consumer.mock.calls.length).toBe(0);
 });
@@ -57,7 +62,7 @@ test('SkyscrapersListEpic makes xhr request when recieves CHANGE_SEARCH_TXT acti
   fake.restore();
 });
 
-test('SkyscrapersListEpic emits AJAX_SEARCH_END action after successful ajax request with payload set to response body', () => {
+test.only('SkyscrapersListEpic emits AJAX_SEARCH_END action after successful ajax request with payload set to response body', () => {
   const responseBody = { id: 13, message: 'hello world' };
   const fake = xhrMock(200, JSON.stringify(responseBody));
   action$.next(changeSearchTxt('foo'));

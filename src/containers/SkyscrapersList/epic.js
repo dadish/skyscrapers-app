@@ -14,6 +14,7 @@ import {
   ajaxSearchEnd,
   ajaxSearchFail,
 } from './actions';
+import { getQuery } from './schema';
 
 /**
  * SkyscrapersList epic
@@ -39,10 +40,14 @@ const epic = (action$) =>
       of$(ajaxSearchStart()),
 
       // make an ajax request
-      ajax.getJSON(process.env.REACT_APP_GRAPHQL)
+      ajax({
+        url: process.env.REACT_APP_GRAPHQL_URL,
+        body: { query: getQuery(action.payload) },
+        method: 'POST',
+      })
 
         // fire AJAX_SEARCH_END action when successfully requested
-        .map(ajaxSearchEnd)
+        .map((xhr) => ajaxSearchEnd(xhr.response))
 
         // fire AJAC_SEARCH_FAIL action if request is note successful
         .catch(e => of$(ajaxSearchFail(e)))
