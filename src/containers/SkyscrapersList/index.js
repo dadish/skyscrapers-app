@@ -1,11 +1,11 @@
 import React from 'react';
 import List from './List';
-import './style.css';
+import { Grid } from 'semantic-ui-react';
 
 const SkyscrapersListComponent = () => (
-  <div className="skylist-w">
+  <Grid.Column>
     <List />
-  </div>
+  </Grid.Column>
 );
 
 export default SkyscrapersListComponent;

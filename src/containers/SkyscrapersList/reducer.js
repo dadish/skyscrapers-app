@@ -12,7 +12,6 @@ export const initialState = fromJS({
 });
 
 const reducer = (state = initialState, action) => {
-  console.log(state.toJS());
   const { type } = action;
   switch (type) {
     case AJAX_SEARCH_START:

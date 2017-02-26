@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from 'components/Menu';
 import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -9,12 +8,12 @@ import configureStore from 'setup/store';
 import { makeSelectLocationState } from 'setup/selectors';
 import createRoutes from 'setup/routes';
 import 'semantic-ui-css/semantic.css';
-import 'setup/index.css';
-import './style.css';
+
+import Header from 'containers/Header';
 
 export const App = ({ children }) => (
-  <div className="app-w">
-    <Menu />
+  <div>
+    <Header />
     {children}
   </div>
 );

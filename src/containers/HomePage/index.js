@@ -1,12 +1,13 @@
 import React from 'react';
 import SkyscrapersMap from 'containers/SkyscrapersMap';
 import SkyscrapersList from 'containers/SkyscrapersList';
+import { Grid } from 'semantic-ui-react';
 
 const Home = () => (
-  <div className="sky-w">
+  <Grid columns={2}>
     <SkyscrapersList />
     <SkyscrapersMap />
-  </div>
+  </Grid>
 );
 
 export default Home;

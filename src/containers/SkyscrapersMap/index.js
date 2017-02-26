@@ -1,10 +1,10 @@
 import React from 'react';
-import './style.css';
+import { Grid } from 'semantic-ui-react';
 
 const SkyscrapersMapComponent = () => (
-  <div className="skymap-w">
+  <Grid.Column>
     <h1>SkyscrapersMap</h1>
-  </div>  
+  </Grid.Column>
 );
 
 export default SkyscrapersMapComponent;

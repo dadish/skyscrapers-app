@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Menu from './index';
+import { HeaderComponent } from '../';
 
 test('renders without crashing', () => {
-  shallow(<Menu />);
+  shallow(<HeaderComponent />);
 });
