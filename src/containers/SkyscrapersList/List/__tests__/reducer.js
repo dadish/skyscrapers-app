@@ -16,5 +16,5 @@ test('it returns the provided state untouched for unknown actions', () => {
 test('resets all the list on AJAX_SEARCH_END action', () => {
   const newState = reducer(initialState, ajaxSearchEnd(payload));
   expect(newState.size).toBe(payload.length);
-  expect(newState.get(0)).toEqual(payload[0]);
+  expect(newState.get(0).toJS()).toEqual(payload[0]);
 });
