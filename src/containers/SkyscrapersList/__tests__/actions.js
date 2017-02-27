@@ -35,5 +35,4 @@ Object.keys(actionsMap).forEach((methodName) => {
   test(`${methodName}() returns the right type`, () => {
     expect(method().type).toBe(type);
   });
-
 });
