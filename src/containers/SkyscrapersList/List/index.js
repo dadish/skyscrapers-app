@@ -10,7 +10,7 @@ export const ListComponent = ({ list, loading }) => {
   return (
     <Card.Group itemsPerRow={2} style={{ minHeight: '200px' }}>
       <Loader active={loading}>Loading...</Loader>
-      {list.map(item => <Item key={item.get('id')} skyscraper={item}/>)}
+      {!loading && list.map(item => <Item key={item.get('id')} skyscraper={item}/>)}
     </Card.Group>
   )
 };
