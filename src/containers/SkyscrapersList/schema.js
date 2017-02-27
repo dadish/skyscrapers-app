@@ -1,5 +1,5 @@
-export const getQuery = (searchTxt) => `{
-  skyscraper(s: "title|body*=${searchTxt}"){
+const query = `query skyscrapers($selector: Selector){
+  skyscraper(s: $selector){
     getTotal
     getLimit
     getStart
@@ -9,6 +9,7 @@ export const getQuery = (searchTxt) => `{
       height
       floors
       year
+      parentID
       map{
         lat
         lng
@@ -22,3 +23,5 @@ export const getQuery = (searchTxt) => `{
     }
   }
 }`;
+
+export const getQuery = () => query;

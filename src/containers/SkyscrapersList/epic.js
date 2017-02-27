@@ -42,7 +42,10 @@ const epic = (action$) =>
       // make an ajax request
       ajax({
         url: process.env.REACT_APP_GRAPHQL_URL,
-        body: { query: getQuery(action.payload) },
+        body: {
+          query: getQuery(),
+          variables: JSON.stringify({ selector: action.payload ? `title|body*=${action.payload}` : "" })
+        },
         method: 'POST',
       })
 
