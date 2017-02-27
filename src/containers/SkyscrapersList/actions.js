@@ -4,6 +4,7 @@ import {
   AJAX_SEARCH_START,
   AJAX_SEARCH_END,
   AJAX_SEARCH_FAIL,
+  INITIAL_LOAD,
 } from './constants';
 
 /**
@@ -25,3 +26,8 @@ export const ajaxSearchEnd = createActionCreator(AJAX_SEARCH_END);
  * The AJAX search request fails
  */
 export const ajaxSearchFail = createActionCreator(AJAX_SEARCH_FAIL);
+
+/**
+ * The user visited the page the first time 
+ */
+export const initialLoad = createActionCreator(INITIAL_LOAD);

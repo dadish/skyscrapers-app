@@ -3,12 +3,14 @@ import {
   ajaxSearchStart,
   ajaxSearchEnd,
   ajaxSearchFail,
+  initialLoad,
 } from '../actions';
 import {
   CHANGE_SEARCH_TXT,
   AJAX_SEARCH_START,
   AJAX_SEARCH_END,
   AJAX_SEARCH_FAIL,
+  INITIAL_LOAD,
 } from '../constants';
 
 const actionsMap = {
@@ -27,6 +29,10 @@ const actionsMap = {
   ajaxSearchFail: {
     method: ajaxSearchFail,
     type: AJAX_SEARCH_FAIL
+  },
+  initialLoad: {
+    method: initialLoad,
+    type: INITIAL_LOAD
   },
 };
 

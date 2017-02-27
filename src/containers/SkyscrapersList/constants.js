@@ -21,3 +21,8 @@ export const AJAX_SEARCH_END = 'skyscrapers/SkyscrapersList/AJAX_SEARCH_END';
  * The AJAX search request fails
  */
 export const AJAX_SEARCH_FAIL = 'skyscrapers/SkyscrapersList/AJAX_SEARCH_FAIL';
+
+/**
+ * The user visited the page the first time 
+ */
+export const INITIAL_LOAD = 'skyscrapers/SkyscrapersList/INITIAL_LOAD';
