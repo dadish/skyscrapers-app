@@ -24,11 +24,11 @@ const epic = (action$) =>
   
   action$
     
+    // react only to CHANGE_SEARCH_TXT actions
+    .ofType(CHANGE_SEARCH_TXT)
+
     // debounce so that we do not fire AJAX request on every keyup
     .debounceTime(300)
-    
-    // react only to CHANGE_SEARCH_TXT actions
-    .filter(({ type, payload }) => type === CHANGE_SEARCH_TXT)
 
     // convert action stream to the ajax start and end/fail actions
     // we use switchMap that helps us convert the actions and at the same

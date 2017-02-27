@@ -1,3 +1,4 @@
+import { ActionsObservable } from 'redux-observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import xhrMock from 'utils/xhrMock';
 import {
@@ -19,7 +20,7 @@ jest.useFakeTimers();
 
 beforeEach(() => {
   action$ = new ReplaySubject();
-  epic$ = SkyscrapersListEpic(action$);
+  epic$ = SkyscrapersListEpic(new ActionsObservable(action$));
   consumer = jest.fn();
   subscribtion = epic$.subscribe(consumer);
 });
