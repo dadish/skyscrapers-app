@@ -29,17 +29,15 @@ afterEach(() => {
   subscribtion.unsubscribe();
 });
 
-test('SkyscrapersListEpic debounces actions and emits only the last one', () => {
-  action$.next(changeSearchTxt('foo'));
+test('SkyscrapersListEpic debounces actions and emits only after 300ms passes', () => {
+  jest.runTimersToTime(290);
   expect(consumer.mock.calls.length).toBe(0);
-  jest.runAllTimers();
-  expect(consumer.mock.calls.length).toBeGreaterThan(0);
 });
 
-test('SkyscrapersListEpic does not react to every action', () => {
-  action$.next({ type: 'everyActionType' });
+test('SkyscrapersListEpic emits one AJAX_SEARCH_START action on start', () => {
   jest.runAllTimers();
-  expect(consumer.mock.calls.length).toBe(0);
+  expect(consumer.mock.calls.length).toBe(1);
+  expect(consumer.mock.calls[0][0].type).toBe(AJAX_SEARCH_START);
 });
 
 test('SkyscrapersListEpic emits AJAX_SEARCH_START when recieves CHANGE_SEARCH_TXT action with not empty payload', () => {
