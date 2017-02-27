@@ -33,7 +33,7 @@ const actionsMap = {
 Object.keys(actionsMap).forEach((methodName) => {
   const { method, type } = actionsMap[methodName];
   test(`${methodName}() returns the right type`, () => {
-    console.log(method)
+    expect(method().type).toBe(type);
   });
 
 });
