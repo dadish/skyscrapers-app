@@ -2,12 +2,12 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import xhrMock from 'utils/xhrMock';
 import {
   changeSearchTxt,
-} from '../actions';
+} from '../../actions';
 import {
   AJAX_SEARCH_START,
   AJAX_SEARCH_END,
   AJAX_SEARCH_FAIL,
-} from '../constants';
+} from '../../constants';
 import SkyscrapersListEpic from '../epic';
 
 let action$;
