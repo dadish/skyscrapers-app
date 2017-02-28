@@ -12,7 +12,7 @@ const {
 
 export const ItemComponent = ({ skyscraper }) => (
   <Card>
-    <Image fluid src="http://placehold.it/200/" alt={skyscraper.get('title')} />
+    <Image fluid src="https://placehold.it/200/" alt={skyscraper.get('title')} />
     <CardContent>
       <CardHeader>{skyscraper.get('title')}</CardHeader>
     </CardContent>
