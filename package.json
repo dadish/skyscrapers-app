@@ -38,5 +38,5 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "/skyscrapers-app/"
+  "homepage": "/site/build/"
 }
