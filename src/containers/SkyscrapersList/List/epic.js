@@ -4,9 +4,9 @@ import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import {
-  ajaxSearchStart,
-  ajaxSearchEnd,
-  ajaxSearchFail,
+  ajaxFetchStart,
+  ajaxFetchEnd,
+  ajaxFetchFail,
 } from '../actions';
 import { getQuery } from '../schema';
 
@@ -19,7 +19,7 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
   return concat$(
 
     // For each ajax request we fire AJAC_SEARCH_START action
-    of$(ajaxSearchStart()),
+    of$(ajaxFetchStart()),
 
     // make an ajax request
     ajax({
@@ -31,11 +31,11 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
       method: 'POST',
     })
 
-      // fire AJAX_SEARCH_END action when successfully requested
-      .map((xhr) => ajaxSearchEnd(xhr.response))
+      // fire AJAX_FETCH_END action when successfully requested
+      .map((xhr) => ajaxFetchEnd(xhr.response))
 
       // fire AJAC_SEARCH_FAIL action if request is note successful
-      .catch(e => of$(ajaxSearchFail(e)))
+      .catch(e => of$(ajaxFetchFail(e)))
   );
 }
   

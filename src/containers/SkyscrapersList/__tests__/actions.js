@@ -1,15 +1,15 @@
 import {
   changeSearchTxt,
-  ajaxSearchStart,
-  ajaxSearchEnd,
-  ajaxSearchFail,
+  ajaxFetchStart,
+  ajaxFetchEnd,
+  ajaxFetchFail,
   initialLoad,
 } from '../actions';
 import {
   CHANGE_SEARCH_TXT,
-  AJAX_SEARCH_START,
-  AJAX_SEARCH_END,
-  AJAX_SEARCH_FAIL,
+  AJAX_FETCH_START,
+  AJAX_FETCH_END,
+  AJAX_FETCH_FAIL,
   INITIAL_LOAD,
 } from '../constants';
 
@@ -18,17 +18,17 @@ const actionsMap = {
     method: changeSearchTxt,
     type: CHANGE_SEARCH_TXT
   },
-  ajaxSearchStart: {
-    method: ajaxSearchStart,
-    type: AJAX_SEARCH_START
+  ajaxFetchStart: {
+    method: ajaxFetchStart,
+    type: AJAX_FETCH_START
   },
-  ajaxSearchEnd: {
-    method: ajaxSearchEnd,
-    type: AJAX_SEARCH_END
+  ajaxFetchEnd: {
+    method: ajaxFetchEnd,
+    type: AJAX_FETCH_END
   },
-  ajaxSearchFail: {
-    method: ajaxSearchFail,
-    type: AJAX_SEARCH_FAIL
+  ajaxFetchFail: {
+    method: ajaxFetchFail,
+    type: AJAX_FETCH_FAIL
   },
   initialLoad: {
     method: initialLoad,

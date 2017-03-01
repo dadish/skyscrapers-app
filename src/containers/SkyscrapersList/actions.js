@@ -1,9 +1,9 @@
 import createActionCreator from 'utils/createActionCreator';
 import {
   CHANGE_SEARCH_TXT,
-  AJAX_SEARCH_START,
-  AJAX_SEARCH_END,
-  AJAX_SEARCH_FAIL,
+  AJAX_FETCH_START,
+  AJAX_FETCH_END,
+  AJAX_FETCH_FAIL,
   INITIAL_LOAD,
 } from './constants';
 
@@ -15,17 +15,17 @@ export const changeSearchTxt = createActionCreator(CHANGE_SEARCH_TXT);
 /**
  * The AJAX search request for matching skyscrapers starts
  */
-export const ajaxSearchStart = createActionCreator(AJAX_SEARCH_START);
+export const ajaxFetchStart = createActionCreator(AJAX_FETCH_START);
 
 /**
  * The AJAX search request successfully ends
  */
-export const ajaxSearchEnd = createActionCreator(AJAX_SEARCH_END);
+export const ajaxFetchEnd = createActionCreator(AJAX_FETCH_END);
 
 /**
  * The AJAX search request fails
  */
-export const ajaxSearchFail = createActionCreator(AJAX_SEARCH_FAIL);
+export const ajaxFetchFail = createActionCreator(AJAX_FETCH_FAIL);
 
 /**
  * The user visited the page the first time 
