@@ -10,7 +10,7 @@ import {
 } from '../actions';
 import { getQuery } from '../schema';
 
-const listEpic = ({ searchTxt, limit, start}) => {
+const listEpic = ({ searchTxt, limit, start} = {}) => {
   let selector = "";
   if (searchTxt) selector += `, title|body*=${searchTxt}`;
   if (start) selector += `, start=${start}`;
