@@ -1,6 +1,7 @@
 import { combineEpics } from 'redux-observable';
-import searchEpic from './Search/epic';
+import listSkyscrapers from './List/epic';
+import searchSkyscrapers from './Search/epic';
 
-const epic = combineEpics(searchEpic);
+const epic = combineEpics(listSkyscrapers, searchSkyscrapers);
 
 export default epic;
