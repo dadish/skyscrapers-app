@@ -1,25 +1,27 @@
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/catch';
 import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import {
-  ajaxSearchStart,
-  ajaxSearchEnd,
-  ajaxSearchFail,
+  ajaxFetchStart,
+  ajaxFetchEnd,
+  ajaxFetchFail,
 } from '../actions';
+import { AJAX_FETCH_END } from '../constants';
 import { getQuery } from '../schema';
 
-const listEpic = ({ searchTxt, limit, start} = {}) => {
+const listCities = ({ limit, start } = {}) => {
   let selector = "";
-  if (searchTxt) selector += `, title|body*=${searchTxt}`;
   if (start) selector += `, start=${start}`;
   if (limit) selector += `, limit=${limit}`;
   selector = selector.substr(2);
   return concat$(
 
     // For each ajax request we fire AJAC_SEARCH_START action
-    of$(ajaxSearchStart()),
+    of$(ajaxFetchStart()),
 
     // make an ajax request
     ajax({
@@ -31,12 +33,26 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
       method: 'POST',
     })
 
-      // fire AJAX_SEARCH_END action when successfully requested
-      .map((xhr) => ajaxSearchEnd(xhr.response))
+      // fire AJAX_FETCH_END action when successfully requested
+      .map((xhr) => ajaxFetchEnd(xhr.response))
 
       // fire AJAC_SEARCH_FAIL action if request is note successful
-      .catch(e => of$(ajaxSearchFail(e)))
+      .catch(e => of$(ajaxFetchFail(e)))
   );
 }
+
+export const listMoreCities = action$ => 
+  action$
+    .ofType(AJAX_FETCH_END)
+    .do(console.log)
+    .takeWhile((action) => {
+      const { getTotal, getLimit, getStart } = action.payload.data.city;
+      return getTotal > getLimit + getStart;
+    })
+    .switchMap((action) => {
+      const { getLimit, getStart } = action.payload.data.city;
+      return listCities({ start: getStart + getLimit });
+    });
+
   
-export default listEpic;
+export default listCities;

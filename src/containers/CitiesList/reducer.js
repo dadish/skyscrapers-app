@@ -1,9 +1,9 @@
 import { fromJS } from 'immutable';
 import listReducer, { initialState as initialListState } from './List/reducer';
 import {
-  AJAX_SEARCH_START,
-  AJAX_SEARCH_END,
-  AJAX_SEARCH_FAIL,
+  AJAX_FETCH_START,
+  AJAX_FETCH_END,
+  AJAX_FETCH_FAIL,
 } from './constants';
 
 export const initialState = fromJS({
@@ -14,12 +14,12 @@ export const initialState = fromJS({
 const reducer = (state = initialState, action) => {
   const { type } = action;
   switch (type) {
-    case AJAX_SEARCH_START:
+    case AJAX_FETCH_START:
       return state.set('loading', true);
-    case AJAX_SEARCH_END:
+    case AJAX_FETCH_END:
       state = state.set('loading', false);
       return state.set('list', listReducer(state.get('list'), action));
-    case AJAX_SEARCH_FAIL:
+    case AJAX_FETCH_FAIL:
       return state.set('loading', false);
     default:
       return state;

@@ -1,6 +1,6 @@
 import reducer, { initialState } from '../reducer';
 import {
-  ajaxSearchEnd,
+  ajaxFetchEnd,
 } from '../../actions';
 
 const list = [
@@ -21,8 +21,10 @@ test('it returns the provided state untouched for unknown actions', () => {
   expect(reducer(initialState, { type: 'unknown' })).toBe(initialState);
 });
 
-test('resets all the list on AJAX_SEARCH_END action', () => {
-  const newState = reducer(initialState, ajaxSearchEnd(payload));
+test('appends all the items on AJAX_FETCH_END action', () => {
+  const newState = reducer(initialState, ajaxFetchEnd(payload));
+  const newerState = reducer(newState, ajaxFetchEnd(payload));
   expect(newState.size).toBe(list.length);
   expect(newState.get(0).toJS()).toEqual(list[0]);
+  expect(newerState.size).toBe(list.length * 2)
 });
