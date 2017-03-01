@@ -7,7 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import {
   CHANGE_SEARCH_TXT,
 } from '../constants';
-import listSkyscrapers from '../List/epic';
+import listCities from '../List/epic';
 
 /**
  * CitiesList epic
@@ -27,7 +27,7 @@ const epic = (action$) =>
     // we use switchMap that helps us convert the actions and at the same
     // time it automatically unsubscribes the previous observables when new
     // one comes in with values that allows us handle AJAX cancellation
-    .switchMap(({ payload }) => listSkyscrapers(payload))
+    .switchMap(({ payload }) => listCities(payload))
 
 
 export default epic;

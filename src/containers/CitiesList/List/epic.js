@@ -8,7 +8,7 @@ import {
 } from '../actions';
 import { getQuery } from '../schema';
 
-const listSkyscrapers = (searchTxt) =>
+const listCities = (searchTxt) =>
   concat$(
 
       // For each ajax request we fire AJAC_SEARCH_START action
@@ -31,4 +31,4 @@ const listSkyscrapers = (searchTxt) =>
         .catch(e => of$(ajaxSearchFail(e)))
     );
 
-export default listSkyscrapers;
+export default listCities;
