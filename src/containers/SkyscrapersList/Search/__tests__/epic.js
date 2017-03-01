@@ -30,11 +30,19 @@ afterEach(() => {
 });
 
 test('SkyscrapersListEpic debounces actions and emits only after 300ms passes', () => {
+  action$.next(changeSearchTxt('foo'));
   jest.runTimersToTime(290);
   expect(consumer.mock.calls.length).toBe(0);
 });
 
+test('SkyscrapersListEpic does not react on randomActions', () => {
+  action$.next({ type: 'RandomAction', payload: 'foo' });
+  jest.runAllTimers();
+  expect(consumer.mock.calls.length).toBe(0);
+});
+
 test('SkyscrapersListEpic emits one AJAX_SEARCH_START action on start', () => {
+  action$.next(changeSearchTxt('foo'));
   jest.runAllTimers();
   expect(consumer.mock.calls.length).toBe(1);
   expect(consumer.mock.calls[0][0].type).toBe(AJAX_SEARCH_START);
