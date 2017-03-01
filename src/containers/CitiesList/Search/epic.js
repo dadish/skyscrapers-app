@@ -4,13 +4,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/switchMap';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {
   CHANGE_SEARCH_TXT,
 } from '../constants';
-import {
-  changeSearchTxt,
-} from '../actions';
 import listSkyscrapers from '../List/epic';
 
 /**
@@ -20,10 +16,6 @@ import listSkyscrapers from '../List/epic';
 const epic = (action$) => 
   
   action$
-
-    // Emit changeSearchTxt() action once. So cities are preloaded when first 
-    // visited
-    .merge(new BehaviorSubject(changeSearchTxt(void 0, 'preload')))
     
     // react only to CHANGE_SEARCH_TXT actions
     .ofType(CHANGE_SEARCH_TXT)

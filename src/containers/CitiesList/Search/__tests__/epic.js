@@ -30,14 +30,9 @@ afterEach(() => {
 });
 
 test('CitiesListEpic debounces actions and emits only after 300ms passes', () => {
+  action$.next(changeSearchTxt('foo'));
   jest.runTimersToTime(290);
   expect(consumer.mock.calls.length).toBe(0);
-});
-
-test('CitiesListEpic emits one AJAX_SEARCH_START action on start', () => {
-  jest.runAllTimers();
-  expect(consumer.mock.calls.length).toBe(1);
-  expect(consumer.mock.calls[0][0].type).toBe(AJAX_SEARCH_START);
 });
 
 test('CitiesListEpic emits AJAX_SEARCH_START when recieves CHANGE_SEARCH_TXT action with not empty payload', () => {
