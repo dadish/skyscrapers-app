@@ -38,4 +38,5 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
       .catch(e => of$(ajaxSearchFail(e)))
   );
 }
-  export default listEpic;
+  
+export default listEpic;
