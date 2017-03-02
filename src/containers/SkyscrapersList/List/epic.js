@@ -8,7 +8,7 @@ import {
   ajaxFetchEnd,
   ajaxFetchFail,
 } from '../actions';
-import { getQuery } from '../schema';
+import query from '../schema';
 
 const listEpic = ({ searchTxt, limit, start} = {}) => {
   let selector = "";
@@ -25,7 +25,7 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
     ajax({
       url: process.env.REACT_APP_GRAPHQL_URL,
       body: {
-        query: getQuery(),
+        query: query,
         variables: JSON.stringify({ selector })
       },
       method: 'POST',
