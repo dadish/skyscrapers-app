@@ -22,7 +22,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleChange: (ev) => dispatch(changeSearchTxt(ev.target.value)),
+  handleChange: (ev) => {
+    dispatch(changeSearchTxt(ev.target.value));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchComponent);
