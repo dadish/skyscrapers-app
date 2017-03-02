@@ -25,3 +25,5 @@ const query = `query skyscrapers($selector: Selector){
 }`;
 
 export const getQuery = () => query;
+
+export default query;
