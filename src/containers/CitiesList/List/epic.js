@@ -1,5 +1,4 @@
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/catch';
 import { concat as concat$ } from 'rxjs/observable/concat';
@@ -44,7 +43,6 @@ const listCities = ({ limit, start } = {}) => {
 export const listMoreCities = action$ => 
   action$
     .ofType(AJAX_FETCH_END)
-    .do(console.log)
     .takeWhile((action) => {
       const { getTotal, getLimit, getStart } = action.payload.data.city;
       return getTotal > getLimit + getStart;
