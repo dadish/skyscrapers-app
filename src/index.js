@@ -4,17 +4,16 @@ import App from 'containers/App';
 
 const rootEl = document.getElementById('root');
 
-ReactDOM.render(
+export const renderRoot = (App, rootEl) => ReactDOM.render(
   <App />,
   rootEl
 );
 
+renderRoot(App, rootEl);
+
 if (module.hot) {
   module.hot.accept('containers/App', () => {
     const NextApp = require('containers/App').default;
-    ReactDOM.render(
-      <NextApp />,
-      rootEl
-    );
+    renderRoot(NextApp, rootEl);
   });
 }
