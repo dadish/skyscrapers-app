@@ -20,20 +20,49 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         require.ensure([
-          'containers/Skyscrapers/reducer',
-          'containers/Skyscrapers/epic',
-          'containers/Cities/reducer',
-          'containers/Cities/epic',
           'containers/HomePage'
         ], (require) => {
           const renderRoute = loadModule(cb);
-          injectEpic('skyscrapers', require('containers/Skyscrapers/epic').default);
-          injectReducer('skyscrapers', require('containers/Skyscrapers/reducer').default);
-          injectEpic('cities', require('containers/Cities/epic').default);
-          injectReducer('cities', require('containers/Cities/reducer').default);
           renderRoute(require('containers/HomePage'));
         })
       },
+      indexRoute: {
+        name: 'skyscrapers',
+        getComponent(nextState, cb) {
+          require.ensure([
+            'containers/Skyscrapers/reducer',
+            'containers/Skyscrapers/epic',
+            'containers/Cities/reducer',
+            'containers/Cities/epic',
+            'containers/Skyscrapers'
+          ], (require) => {
+            const renderRoute = loadModule(cb);
+            injectEpic('skyscrapers', require('containers/Skyscrapers/epic').default);
+            injectReducer('skyscrapers', require('containers/Skyscrapers/reducer').default);
+            injectEpic('cities', require('containers/Cities/epic').default);
+            injectReducer('cities', require('containers/Cities/reducer').default);
+            renderRoute(require('containers/Skyscrapers'));
+          })
+        },
+      },
+      childRoutes: [
+        {
+          path: '/cities',
+          name: 'cities',
+          getComponent(nextState, cb) {
+            require.ensure([
+              'containers/Cities/reducer',
+              'containers/Cities/epic',
+              'containers/Cities'
+            ], (require) => {
+              const renderRoute = loadModule(cb);
+              injectEpic('cities', require('containers/Cities/epic').default);
+              injectReducer('cities', require('containers/Cities/reducer').default);
+              renderRoute(require('containers/Cities'));
+            })
+          },
+        }
+      ]
     }, {
       path: '/about',
       name: 'about',
