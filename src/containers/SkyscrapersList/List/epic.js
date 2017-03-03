@@ -51,5 +51,10 @@ export const updateListEpic = (action$, store) =>
       const searchTxt = selectSearchTxtQuery()(store.getState());
       return listEpic({ searchTxt });
     });
+
+export const initListEpic = (action$, store) => {
+  const searchTxt = selectSearchTxtQuery()(store.getState());
+  return listEpic({ searchTxt });
+}
   
 export default listEpic;
