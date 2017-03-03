@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import listReducer, { initialState as initialListState } from './List/reducer';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   AJAX_FETCH_START,
   AJAX_FETCH_END,
@@ -25,6 +26,10 @@ const reducer = (state = initialState, action) => {
       return state.set('loading', false);
     case CHANGE_SEARCH_TXT:
       return state.set('searchTxt', payload);
+    case LOCATION_CHANGE:
+      if (payload.action !== 'POP') return state;
+      const searchTxt = payload.query.searchTxt || "";
+      return state.set('searchTxt', searchTxt);
     default:
       return state;
   }
