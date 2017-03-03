@@ -17,7 +17,7 @@ export const selectQuery = () => createSelector(
   location => location.get('query'),
 )
 
-export const selectSearchTxtQuery = () => createSelector(
+export const selectParamKeyword = () => createSelector(
   selectQuery(),
-  query => query.get('searchTxt'),
+  query => query.get('keyword'),
 );

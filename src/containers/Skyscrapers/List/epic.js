@@ -6,7 +6,7 @@ import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { selectKeywordQuery } from 'containers/App/selectors';
+import { selectParamKeyword } from 'containers/App/selectors';
 import {
   ajaxFetchStart,
   ajaxFetchEnd,
@@ -48,12 +48,12 @@ export const updateListEpic = (action$, store) =>
     .ofType(LOCATION_CHANGE)
     .filter(action => action.payload.action === 'POP' && action.payload.pathname === '/')
     .switchMap(action => {
-      const keyword = selectKeywordQuery()(store.getState());
+      const keyword = selectParamKeyword()(store.getState());
       return listEpic({ keyword });
     });
 
 export const initListEpic = (action$, store) => {
-  const keyword = selectKeywordQuery()(store.getState());
+  const keyword = selectParamKeyword()(store.getState());
   return listEpic({ keyword });
 }
   

@@ -5,7 +5,7 @@ import { Input } from 'semantic-ui-react';
 import {
   updateFilterKeyword,
 } from '../actions';
-import { selectLoading, selectKeyword } from '../selectors';
+import { selectLoading, selectFilterKeyword } from '../selectors';
 
 export const FilterComponent = ({ handleChange, loading, keyword }) => (
   <Input
@@ -20,7 +20,7 @@ export const FilterComponent = ({ handleChange, loading, keyword }) => (
 
 const mapStateToProps = createStructuredSelector({
   loading: selectLoading(),
-  keyword: selectKeyword(),
+  keyword: selectFilterKeyword(),
 });
 
 const mapDispatchToProps = dispatch => ({

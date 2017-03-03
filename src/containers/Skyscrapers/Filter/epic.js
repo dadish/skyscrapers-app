@@ -7,7 +7,7 @@ import {
   UPDATE_FILTER_KEYWORD,
   AJAX_FETCH_END,
 } from '../constants';
-import { selectKeyword } from '../selectors';
+import { selectFilterKeyword } from '../selectors';
 import listEpic from '../List/epic';
 
 /**
@@ -29,7 +29,7 @@ const epic = (action$, store) =>
     // time it automatically unsubscribes the previous observables when new
     // one comes in with values that allows us handle AJAX cancellation
     .switchMap(() => {
-      const keyword = selectKeyword()(store.getState());
+      const keyword = selectFilterKeyword()(store.getState());
       return listEpic({ keyword })
         .mergeMap(action => {
           const actionsList = [action];

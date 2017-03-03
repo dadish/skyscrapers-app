@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import {
   selectSkyscrapers,
   selectLoading,
-  selectKeyword,
+  selectFilterKeyword,
 } from '../selectors';
 
 const loading = 'skyscrapers/Skyscrapers/loading';
@@ -25,6 +25,6 @@ test('selectLoading() selects [`skyscrapers`, `loading`]', () => {
   expect(selectLoading()(state)).toBe(loading);
 });
 
-test('selectKeyword() selects [`skyscrapers`, `keyword`]', () => {
-  expect(selectKeyword()(state)).toBe(keyword);
+test('selectFilterKeyword() selects [`skyscrapers`, `keyword`]', () => {
+  expect(selectFilterKeyword()(state)).toBe(keyword);
 });

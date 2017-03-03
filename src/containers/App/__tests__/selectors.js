@@ -1,15 +1,15 @@
 import { fromJS } from 'immutable';
-import { selectPathname, selectSearchTxtQuery } from '../selectors';
+import { selectPathname, selectParamKeyword } from '../selectors';
 
 const pathname = 'skyscrapers/App/pathname';
-const searchTxt = 'skyscrapers/App/searchTxt';
+const keyword = 'skyscrapers/App/keyword';
 
 const state = fromJS({
   route: {
     locationBeforeTransitions: {
       pathname,
       query: {
-        searchTxt,
+        keyword,
       }
     }
   }
@@ -19,6 +19,6 @@ test('selectPathname() selects [`route`, `locationBeforeTransitions`, `pathname`
   expect(selectPathname()(state)).toBe(pathname);
 });
 
-test('selectPathname() selects [`route`, `locationBeforeTransitions`, `query`, `searchTxt`]', () => {
-  expect(selectSearchTxtQuery()(state)).toBe(searchTxt);
+test('selectPathname() selects [`route`, `locationBeforeTransitions`, `query`, `keyword`]', () => {
+  expect(selectParamKeyword()(state)).toBe(keyword);
 });
