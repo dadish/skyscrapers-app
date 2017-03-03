@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { ActionsObservable } from 'redux-observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import xhrMock from 'utils/xhrMock';
@@ -16,12 +17,19 @@ let action$;
 let epic$;
 let consumer;
 let subscribtion;
+const store = {
+  getState: () => fromJS({
+    skyscrapers: {
+      searchTxt: 'foo',
+    },
+  }),
+};
 
 jest.useFakeTimers();
 
 beforeEach(() => {
   action$ = new ReplaySubject();
-  epic$ = SkyscrapersSearchEpic(new ActionsObservable(action$));
+  epic$ = SkyscrapersSearchEpic(new ActionsObservable(action$), store);
   consumer = jest.fn();
   subscribtion = epic$.subscribe(consumer);
 });

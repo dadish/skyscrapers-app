@@ -7,13 +7,14 @@ import {
   CHANGE_SEARCH_TXT,
   AJAX_FETCH_END,
 } from '../constants';
+import { selectSearchTxt } from '../selectors';
 import listEpic from '../List/epic';
 
 /**
  * SkyscrapersList epic
  * Coordinates the redux side effects
  */
-const epic = (action$) => 
+const epic = (action$, store) => 
   
   action$
     
@@ -27,16 +28,18 @@ const epic = (action$) =>
     // we use switchMap that helps us convert the actions and at the same
     // time it automatically unsubscribes the previous observables when new
     // one comes in with values that allows us handle AJAX cancellation
-    .switchMap(({ payload }) =>  
-      listEpic({ searchTxt: payload })
+    .switchMap(() => {
+      const searchTxt = selectSearchTxt()(store.getState());
+      return listEpic({ searchTxt })
         .mergeMap(action => {
           const actionsList = [action];
           if (action.type !== AJAX_FETCH_END) return actionsList;
           let newLocation = '/';
-          if (payload) newLocation += `?searchTxt=${payload}`;
+          if (searchTxt) newLocation += `?searchTxt=${searchTxt}`;
           actionsList.push(push(newLocation));
           return actionsList;
-        })
+        });
+      }
     )
 
 export default epic;

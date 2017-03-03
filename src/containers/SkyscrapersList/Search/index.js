@@ -5,20 +5,22 @@ import { Input } from 'semantic-ui-react';
 import {
   changeSearchTxt,
 } from '../actions';
-import { selectLoading } from '../selectors';
+import { selectLoading, selectSearchTxt } from '../selectors';
 
-export const SearchComponent = ({ handleChange, loading }) => (
+export const SearchComponent = ({ handleChange, loading, searchTxt }) => (
   <Input
     fluid
     icon="search"
     placeholder="Search skyscrapers..."
     onChange={handleChange}
+    value={searchTxt}
     loading={loading}
   />
 );
 
 const mapStateToProps = createStructuredSelector({
   loading: selectLoading(),
+  searchTxt: selectSearchTxt(),
 });
 
 const mapDispatchToProps = dispatch => ({
