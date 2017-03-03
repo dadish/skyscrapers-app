@@ -6,7 +6,7 @@ import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { selectSearchTxtQuery } from 'containers/App/selectors';
+import { selectKeywordQuery } from 'containers/App/selectors';
 import {
   ajaxFetchStart,
   ajaxFetchEnd,
@@ -14,15 +14,15 @@ import {
 } from '../actions';
 import query from '../schema';
 
-const listEpic = ({ searchTxt, limit, start} = {}) => {
+const listEpic = ({ keyword, limit, start} = {}) => {
   let selector = "";
-  if (searchTxt) selector += `, title|body*=${searchTxt}`;
+  if (keyword) selector += `, title|body*=${keyword}`;
   if (start) selector += `, start=${start}`;
   if (limit) selector += `, limit=${limit}`;
   selector = selector.substr(2);
   return concat$(
 
-    // For each ajax request we fire AJAC_SEARCH_START action
+    // For each ajax request we fire AJAC_FILTER_START action
     of$(ajaxFetchStart()),
 
     // make an ajax request
@@ -38,7 +38,7 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
       // fire AJAX_FETCH_END action when successfully requested
       .map((xhr) => ajaxFetchEnd(xhr.response))
 
-      // fire AJAC_SEARCH_FAIL action if request is note successful
+      // fire AJAC_FILTER_FAIL action if request is note successful
       .catch(e => of$(ajaxFetchFail(e)))
   );
 }
@@ -48,13 +48,13 @@ export const updateListEpic = (action$, store) =>
     .ofType(LOCATION_CHANGE)
     .filter(action => action.payload.action === 'POP' && action.payload.pathname === '/')
     .switchMap(action => {
-      const searchTxt = selectSearchTxtQuery()(store.getState());
-      return listEpic({ searchTxt });
+      const keyword = selectKeywordQuery()(store.getState());
+      return listEpic({ keyword });
     });
 
 export const initListEpic = (action$, store) => {
-  const searchTxt = selectSearchTxtQuery()(store.getState());
-  return listEpic({ searchTxt });
+  const keyword = selectKeywordQuery()(store.getState());
+  return listEpic({ keyword });
 }
   
 export default listEpic;

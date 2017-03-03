@@ -3,30 +3,30 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Input } from 'semantic-ui-react';
 import {
-  changeSearchTxt,
+  changeKeyword,
 } from '../actions';
-import { selectLoading, selectSearchTxt } from '../selectors';
+import { selectLoading, selectKeyword } from '../selectors';
 
-export const SearchComponent = ({ handleChange, loading, searchTxt }) => (
+export const FilterComponent = ({ handleChange, loading, keyword }) => (
   <Input
     fluid
-    icon="search"
-    placeholder="Search skyscrapers..."
+    icon="filter"
+    placeholder="Filter skyscrapers..."
     onChange={handleChange}
-    value={searchTxt}
+    value={keyword}
     loading={loading}
   />
 );
 
 const mapStateToProps = createStructuredSelector({
   loading: selectLoading(),
-  searchTxt: selectSearchTxt(),
+  keyword: selectKeyword(),
 });
 
 const mapDispatchToProps = dispatch => ({
   handleChange: (ev) => {
-    dispatch(changeSearchTxt(ev.target.value));
+    dispatch(changeKeyword(ev.target.value));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent);

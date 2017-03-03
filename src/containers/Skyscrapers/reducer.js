@@ -5,13 +5,23 @@ import {
   AJAX_FETCH_START,
   AJAX_FETCH_END,
   AJAX_FETCH_FAIL,
-  CHANGE_SEARCH_TXT,
+  CHANGE_FILTER_TXT,
 } from './constants';
 
 export const initialState = fromJS({
   list: initialListState,
   loading: false,
-  searchTxt: '',
+  filterOn: false,
+  filter: {
+    keyword: '',
+    city: [],
+    heightMin: false,
+    heigthMax: false,
+    floorsMin: false,
+    floorsMax: false,
+    yearMin: false,
+    yearMax: false,
+  },
 });
 
 const reducer = (state = initialState, action) => {
@@ -24,12 +34,12 @@ const reducer = (state = initialState, action) => {
       return state.set('list', listReducer(state.get('list'), action));
     case AJAX_FETCH_FAIL:
       return state.set('loading', false);
-    case CHANGE_SEARCH_TXT:
-      return state.set('searchTxt', payload);
+    case CHANGE_FILTER_TXT:
+      return state.set('keyword', payload);
     case LOCATION_CHANGE:
       if (payload.action !== 'POP') return state;
-      const searchTxt = payload.query.searchTxt || "";
-      return state.set('searchTxt', searchTxt);
+      const keyword = payload.query.keyword || "";
+      return state.set('keyword', keyword);
     default:
       return state;
   }

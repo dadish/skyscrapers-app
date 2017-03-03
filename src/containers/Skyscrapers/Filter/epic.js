@@ -4,10 +4,10 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/from';
 import { push } from 'react-router-redux';
 import {
-  CHANGE_SEARCH_TXT,
+  CHANGE_FILTER_TXT,
   AJAX_FETCH_END,
 } from '../constants';
-import { selectSearchTxt } from '../selectors';
+import { selectKeyword } from '../selectors';
 import listEpic from '../List/epic';
 
 /**
@@ -18,8 +18,8 @@ const epic = (action$, store) =>
   
   action$
     
-    // react only to CHANGE_SEARCH_TXT actions
-    .ofType(CHANGE_SEARCH_TXT)
+    // react only to CHANGE_FILTER_TXT actions
+    .ofType(CHANGE_FILTER_TXT)
 
     // debounce so that we do not fire AJAX request on every keyup
     .debounceTime(300)
@@ -29,13 +29,13 @@ const epic = (action$, store) =>
     // time it automatically unsubscribes the previous observables when new
     // one comes in with values that allows us handle AJAX cancellation
     .switchMap(() => {
-      const searchTxt = selectSearchTxt()(store.getState());
-      return listEpic({ searchTxt })
+      const keyword = selectKeyword()(store.getState());
+      return listEpic({ keyword })
         .mergeMap(action => {
           const actionsList = [action];
           if (action.type !== AJAX_FETCH_END) return actionsList;
           let newLocation = '/';
-          if (searchTxt) newLocation += `?searchTxt=${searchTxt}`;
+          if (keyword) newLocation += `?keyword=${keyword}`;
           actionsList.push(push(newLocation));
           return actionsList;
         });

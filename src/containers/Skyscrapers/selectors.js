@@ -7,7 +7,7 @@ export const selectLoading = () => createSelector(
   skyscrapers => skyscrapers.get('loading'),
 );
 
-export const selectSearchTxt = () => createSelector(
+export const selectKeyword = () => createSelector(
   selectSkyscrapers(),
-  skyscrapers => skyscrapers.get('searchTxt'),
+  skyscrapers => skyscrapers.get('keyword'),
 );

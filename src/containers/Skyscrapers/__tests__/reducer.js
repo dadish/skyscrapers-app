@@ -5,7 +5,7 @@ import {
   ajaxFetchStart,
   ajaxFetchEnd,
   ajaxFetchFail,
-  changeSearchTxt,
+  changeKeyword,
 } from '../actions';
 
 jest.mock('../List/reducer', () => jest.fn());
@@ -31,36 +31,36 @@ test('sets the `loading` property to `false` on AJAX_FETCH_FAIL action', () => {
   expect(reducer(state, ajaxFetchFail()).get('loading')).toBe(false);
 });
 
-test('updates the searchTxt with payload on CHANGE_SEARCH_TXT action', () => {
+test('updates the keyword with payload on CHANGE_FILTER_TXT action', () => {
   const payload = 'admfsygjbwnla';
-  expect(reducer(initialState, changeSearchTxt(payload)).get('searchTxt')).toBe(payload);
+  expect(reducer(initialState, changeKeyword(payload)).get('keyword')).toBe(payload);
 });
 
-test('updates the searchTxt according to browser URL query on LOCATION_CHANGE action with POP location action type', () => {
-  const searchTxt = 'esfkbnma/d,gn aldjxngm';
+test('updates the keyword according to browser URL query on LOCATION_CHANGE action with POP location action type', () => {
+  const keyword = 'esfkbnma/d,gn aldjxngm';
   const action = {
     type: LOCATION_CHANGE,
     payload: {
       action: 'POP',
-      query: { searchTxt }
+      query: { keyword }
     }
   };
-  expect(reducer(initialState, action).get('searchTxt')).toBe(searchTxt);
+  expect(reducer(initialState, action).get('keyword')).toBe(keyword);
 });
 
 test('does not react on LOCATION_CHANGE action with location action type other than POP', () => {
-  const searchTxt = 'esfkbnma/d,gn aldjxngm';
+  const keyword = 'esfkbnma/d,gn aldjxngm';
   const action = {
     type: LOCATION_CHANGE,
     payload: {
       action: 'REPLACE',
-      query: { searchTxt }
+      query: { keyword }
     }
   };
-  expect(reducer(initialState, action).get('searchTxt')).not.toBe(searchTxt);
+  expect(reducer(initialState, action).get('keyword')).not.toBe(keyword);
 });
 
-test('sets searchTxt to empty strin on LOCATION_CHANGE action if there is not searchTxt query parameter', () => {
+test('sets keyword to empty strin on LOCATION_CHANGE action if there is not keyword query parameter', () => {
   const action = {
     type: LOCATION_CHANGE,
     payload: {
@@ -68,8 +68,8 @@ test('sets searchTxt to empty strin on LOCATION_CHANGE action if there is not se
       query: {}
     }
   };
-  const state = initialState.set('searchTxt', 'askhgjf');
-  expect(reducer(state, action).get('searchTxt')).toBe("");
+  const state = initialState.set('keyword', 'askhgjf');
+  expect(reducer(state, action).get('keyword')).toBe("");
 });
 
 test('delegates the AJAX_FETCH_END action to ./List/reducer', () => {
