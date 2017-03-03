@@ -1,8 +1,12 @@
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/switchMap';
 import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
+import { LOCATION_CHANGE } from 'react-router-redux';
+import { selectSearchTxtQuery } from 'containers/App/selectors';
 import {
   ajaxFetchStart,
   ajaxFetchEnd,
@@ -38,5 +42,14 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
       .catch(e => of$(ajaxFetchFail(e)))
   );
 }
+
+export const updateListEpic = (action$, store) =>
+  action$
+    .ofType(LOCATION_CHANGE)
+    .filter(action => action.payload.action === 'POP')
+    .switchMap(action => {
+      const searchTxt = selectSearchTxtQuery()(store.getState());
+      return listEpic({ searchTxt });
+    });
   
 export default listEpic;
