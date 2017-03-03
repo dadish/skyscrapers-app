@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectItem as selectCity } from 'containers/CitiesList/Item/selectors';
+import { selectItem as selectCity } from 'containers/Cities/Item/selectors';
 import {
   Card,
   Image,

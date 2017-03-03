@@ -4,7 +4,7 @@ import {
   selectLoading,
 } from '../selectors';
 
-const loading = 'cities/CitiesList/loading';
+const loading = 'cities/Cities/loading';
 
 const cities = {
   loading

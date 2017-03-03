@@ -3,7 +3,7 @@ import List from './List';
 import Search from './Search';
 import { Divider } from 'semantic-ui-react';
 
-const CitiesListComponent = () => (
+const CitiesComponent = () => (
   <div>
     <Search />
     <Divider hidden />
@@ -11,4 +11,4 @@ const CitiesListComponent = () => (
   </div>
 );
 
-export default CitiesListComponent;
+export default CitiesComponent;

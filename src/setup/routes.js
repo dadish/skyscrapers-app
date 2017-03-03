@@ -22,15 +22,15 @@ export default function createRoutes(store) {
         require.ensure([
           'containers/Skyscrapers/reducer',
           'containers/Skyscrapers/epic',
-          'containers/CitiesList/reducer',
-          'containers/CitiesList/epic',
+          'containers/Cities/reducer',
+          'containers/Cities/epic',
           'containers/HomePage'
         ], (require) => {
           const renderRoute = loadModule(cb);
           injectEpic('skyscrapers', require('containers/Skyscrapers/epic').default);
           injectReducer('skyscrapers', require('containers/Skyscrapers/reducer').default);
-          injectEpic('cities', require('containers/CitiesList/epic').default);
-          injectReducer('cities', require('containers/CitiesList/reducer').default);
+          injectEpic('cities', require('containers/Cities/epic').default);
+          injectReducer('cities', require('containers/Cities/reducer').default);
           renderRoute(require('containers/HomePage'));
         })
       },
