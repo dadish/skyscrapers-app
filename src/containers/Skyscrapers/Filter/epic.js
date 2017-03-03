@@ -4,7 +4,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/from';
 import { push } from 'react-router-redux';
 import {
-  CHANGE_FILTER_TXT,
+  UPDATE_FILTER_KEYWORD,
   AJAX_FETCH_END,
 } from '../constants';
 import { selectKeyword } from '../selectors';
@@ -18,8 +18,8 @@ const epic = (action$, store) =>
   
   action$
     
-    // react only to CHANGE_FILTER_TXT actions
-    .ofType(CHANGE_FILTER_TXT)
+    // react only to UPDATE_FILTER_KEYWORD actions
+    .ofType(UPDATE_FILTER_KEYWORD)
 
     // debounce so that we do not fire AJAX request on every keyup
     .debounceTime(300)

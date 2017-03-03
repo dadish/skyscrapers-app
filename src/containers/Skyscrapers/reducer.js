@@ -5,7 +5,7 @@ import {
   AJAX_FETCH_START,
   AJAX_FETCH_END,
   AJAX_FETCH_FAIL,
-  CHANGE_FILTER_TXT,
+  UPDATE_FILTER_KEYWORD,
 } from './constants';
 
 export const initialState = fromJS({
@@ -34,7 +34,7 @@ const reducer = (state = initialState, action) => {
       return state.set('list', listReducer(state.get('list'), action));
     case AJAX_FETCH_FAIL:
       return state.set('loading', false);
-    case CHANGE_FILTER_TXT:
+    case UPDATE_FILTER_KEYWORD:
       return state.set('keyword', payload);
     case LOCATION_CHANGE:
       if (payload.action !== 'POP') return state;

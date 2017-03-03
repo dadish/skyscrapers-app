@@ -1,6 +1,6 @@
 import createActionCreator from 'utils/createActionCreator';
 import {
-  CHANGE_FILTER_TXT,
+  UPDATE_FILTER_KEYWORD,
   AJAX_FETCH_START,
   AJAX_FETCH_END,
   AJAX_FETCH_FAIL,
@@ -10,7 +10,7 @@ import {
 /**
  * When the user updates the filter text
  */
-export const changeKeyword = createActionCreator(CHANGE_FILTER_TXT);
+export const updateFilterKeyword = createActionCreator(UPDATE_FILTER_KEYWORD);
 
 /**
  * The AJAX filter request for matching skyscrapers starts

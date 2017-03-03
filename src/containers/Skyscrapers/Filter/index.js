@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Input } from 'semantic-ui-react';
 import {
-  changeKeyword,
+  updateFilterKeyword,
 } from '../actions';
 import { selectLoading, selectKeyword } from '../selectors';
 
@@ -25,7 +25,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   handleChange: (ev) => {
-    dispatch(changeKeyword(ev.target.value));
+    dispatch(updateFilterKeyword(ev.target.value));
   },
 });
 

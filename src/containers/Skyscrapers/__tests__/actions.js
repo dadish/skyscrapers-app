@@ -1,12 +1,12 @@
 import {
-  changeKeyword,
+  updateFilterKeyword,
   ajaxFetchStart,
   ajaxFetchEnd,
   ajaxFetchFail,
   initialLoad,
 } from '../actions';
 import {
-  CHANGE_FILTER_TXT,
+  UPDATE_FILTER_KEYWORD,
   AJAX_FETCH_START,
   AJAX_FETCH_END,
   AJAX_FETCH_FAIL,
@@ -14,9 +14,9 @@ import {
 } from '../constants';
 
 const actionsMap = {
-  changeKeyword: {
-    method: changeKeyword,
-    type: CHANGE_FILTER_TXT
+  updateFilterKeyword: {
+    method: updateFilterKeyword,
+    type: UPDATE_FILTER_KEYWORD
   },
   ajaxFetchStart: {
     method: ajaxFetchStart,

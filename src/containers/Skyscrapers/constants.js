@@ -5,7 +5,7 @@
 /**
  * When the user updates the filter text
  */
-export const CHANGE_FILTER_TXT = 'skyscrapers/Skyscrapers/CHANGE_FILTER_TXT';
+export const UPDATE_FILTER_KEYWORD = 'skyscrapers/Skyscrapers/UPDATE_FILTER_KEYWORD';
 
 /**
  * The AJAX filter request for matching skyscrapers starts
