@@ -46,7 +46,7 @@ const listEpic = ({ searchTxt, limit, start} = {}) => {
 export const updateListEpic = (action$, store) =>
   action$
     .ofType(LOCATION_CHANGE)
-    .filter(action => action.payload.action === 'POP')
+    .filter(action => action.payload.action === 'POP' && action.payload.pathname === '/')
     .switchMap(action => {
       const searchTxt = selectSearchTxtQuery()(store.getState());
       return listEpic({ searchTxt });
