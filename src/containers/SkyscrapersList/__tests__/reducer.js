@@ -4,6 +4,7 @@ import {
   ajaxFetchStart,
   ajaxFetchEnd,
   ajaxFetchFail,
+  changeSearchTxt,
 } from '../actions';
 
 jest.mock('../List/reducer', () => jest.fn());
@@ -27,6 +28,11 @@ test('sets the `loading` property to `false` on AJAX_FETCH_FAIL action', () => {
   const state = initialState.set('loading', true);
   expect(state.get('loading')).toBe(true);
   expect(reducer(state, ajaxFetchFail()).get('loading')).toBe(false);
+});
+
+test('updates the searchTxt with payload on CHANGE_SEARCH_TXT action', () => {
+  const payload = 'admfsygjbwnla';
+  expect(reducer(initialState, changeSearchTxt(payload)).get('searchTxt')).toBe(payload);
 });
 
 test('delegates the AJAX_FETCH_END action to ./List/reducer', () => {
