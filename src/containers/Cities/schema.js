@@ -6,6 +6,7 @@ const query = `query cities($selector: Selector){
     list{
       id
       title
+      skyscrapersCount: numChildren
       map{
         lat
         lng
