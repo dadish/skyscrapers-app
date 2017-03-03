@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import { selectList } from '../selectors';
 
-const list = 'skyscrapers/SkyscrapersList/List/list';
+const list = 'skyscrapers/Skyscrapers/List/list';
 
 const state = fromJS({
   skyscrapers: {

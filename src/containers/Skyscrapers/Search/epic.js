@@ -11,7 +11,7 @@ import { selectSearchTxt } from '../selectors';
 import listEpic from '../List/epic';
 
 /**
- * SkyscrapersList epic
+ * Skyscrapers epic
  * Coordinates the redux side effects
  */
 const epic = (action$, store) => 

@@ -5,8 +5,8 @@ import {
   selectSearchTxt,
 } from '../selectors';
 
-const loading = 'skyscrapers/SkyscrapersList/loading';
-const searchTxt = 'skyscrapers/SkyscrapersList/searchTxt';
+const loading = 'skyscrapers/Skyscrapers/loading';
+const searchTxt = 'skyscrapers/Skyscrapers/searchTxt';
 
 const skyscrapers = {
   loading,

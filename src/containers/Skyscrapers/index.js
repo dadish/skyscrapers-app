@@ -3,7 +3,7 @@ import List from './List';
 import Search from './Search';
 import { Divider } from 'semantic-ui-react';
 
-const SkyscrapersListComponent = () => (
+const SkyscrapersComponent = () => (
   <div>
     <Search />
     <Divider hidden />
@@ -11,4 +11,4 @@ const SkyscrapersListComponent = () => (
   </div>
 );
 
-export default SkyscrapersListComponent;
+export default SkyscrapersComponent;

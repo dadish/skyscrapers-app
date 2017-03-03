@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SkyscrapersList from '../';
+import Skyscrapers from '../';
 
 test('renders without crashing', () => {
-  shallow(<SkyscrapersList />);
+  shallow(<Skyscrapers />);
 });
