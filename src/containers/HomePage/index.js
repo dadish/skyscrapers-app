@@ -5,8 +5,8 @@ import { Grid } from 'semantic-ui-react';
 const { Column } = Grid;
 
 const Home = () => (
-  <Grid columns={2} centered>
-    <Column>
+  <Grid columns="equal" centered>
+    <Column width={12}>
       <Skyscrapers />
     </Column>
   </Grid>
