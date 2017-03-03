@@ -10,6 +10,7 @@ const query = `query skyscrapers($selector: Selector){
       floors
       year
       parentID
+      wikipedia_id
       map{
         lat
         lng
