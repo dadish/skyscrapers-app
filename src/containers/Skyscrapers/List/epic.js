@@ -12,9 +12,8 @@ import {
 } from '../actions';
 import query from '../schema';
 
-const listEpic = (selector = "") => {
-
-  return concat$(
+const listEpic = (selector = "") =>
+  concat$(
 
     // For each ajax request we fire AJAC_FILTER_START action
     of$(ajaxFetchStart()),
@@ -35,6 +34,5 @@ const listEpic = (selector = "") => {
       // fire AJAC_FILTER_FAIL action if request is note successful
       .catch(e => of$(ajaxFetchFail(e)))
   );
-}
   
 export default listEpic;
