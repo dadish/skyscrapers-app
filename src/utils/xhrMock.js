@@ -2,7 +2,7 @@ import sinon from 'sinon';
 
 const defaultStatus = 200;
 const defaultHeaders = { "Content-Type": "application/json" };
-const defaultBody = '[{ "id": 12, "comment": "Hey there" }]';
+const defaultBody = [{ "id": 12, "comment": "Hey there" }];
 
 /**
  * Mocks the XMLHttpRequest with sinon.useFakeXMLHttpRequest. The mock auto responds to all
@@ -21,7 +21,7 @@ export default function xhrMock(status = defaultStatus, body = defaultBody, head
   fake.requests = [];
   fake.xhr.onCreate = (xhr) => {
     fake.requests.push(xhr);
-    setTimeout(() => xhr.respond(status, headers, body), 10);
+    setTimeout(() => xhr.respond(status, headers, JSON.stringify(body)), 10);
   };
   fake.restore = () => fake.xhr.restore();
   return fake;
