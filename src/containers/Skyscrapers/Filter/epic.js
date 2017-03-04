@@ -3,6 +3,7 @@ import 'rxjs/add/operator/switchMap';
 import {
   actionTypes,
 } from 'redux-form';
+import { selectFilterSelector } from './selectors';
 import listEpic from '../List/epic';
 
 const { CHANGE } = actionTypes;
@@ -11,8 +12,7 @@ const { CHANGE } = actionTypes;
  * Skyscrapers epic
  * Coordinates the redux side effects
  */
-const epic = (action$, store) => 
-  
+const epic = (action$, store) =>
   action$
     
     // react only to CHANGE actions
@@ -25,6 +25,9 @@ const epic = (action$, store) =>
     // we use switchMap that helps us convert the actions and at the same
     // time it automatically unsubscribes the previous observables when new
     // one comes in with values that allows us handle AJAX cancellation
-    .switchMap(listEpic)
+    .switchMap(() => {
+      const selector = selectFilterSelector()(store.getState());
+      return listEpic(selector);
+    });
 
 export default epic;

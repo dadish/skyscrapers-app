@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import {
   change,
 } from 'redux-form';
+import { selectFilterSelector } from '../selectors';
 import SkyscrapersFilterEpic from '../epic';
 import ListEpic from '../../List/epic'
 
@@ -13,8 +14,16 @@ let consumer;
 let subscribtion;
 const store = {
   getState: () => fromJS({
-    skyscrapers: {
-      keyword: 'foo',
+    form: {
+      filter: {
+        values: {
+          keyword: "bank",
+          height: "500-750",
+          floors: "80+",
+          year: "1950",
+          cities: ["2345", "1321"],
+        }
+      },
     },
   }),
 };
@@ -63,4 +72,11 @@ test('SkyscrapersFilterEpic switchMaps the stream to ListEpic', () => {
   expect(ListEpic.mock.calls.length).toBe(0);
   jest.runAllTimers();
   expect(ListEpic.mock.calls.length).toBe(1);
+});
+
+test('SkyscrapersFilterEpic passes in a pw selector from selectFilterSelector selector', () => {
+  action$.next(change('foo', 'bar', 'baz'));
+  expect(ListEpic.mock.calls.length).toBe(0);
+  jest.runAllTimers();
+  expect(ListEpic.mock.calls[0][0]).toBe(selectFilterSelector()(store.getState()));
 });
