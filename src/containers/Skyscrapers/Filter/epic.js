@@ -25,6 +25,6 @@ const epic = (action$, store) =>
     // we use switchMap that helps us convert the actions and at the same
     // time it automatically unsubscribes the previous observables when new
     // one comes in with values that allows us handle AJAX cancellation
-    .switchMap(() => listEpic())
+    .switchMap(listEpic)
 
 export default epic;
