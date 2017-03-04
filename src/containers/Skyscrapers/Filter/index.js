@@ -1,32 +1,92 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Input } from 'semantic-ui-react';
+import { reduxForm, Field as ReduxFormField } from 'redux-form/immutable';
+import { Form as SemanticForm } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
+import InputText from 'components/InputText';
+import InputSelect from 'components/InputSelect';
+import InputDropdown from 'components/InputDropdown';
 import {
-  updateFilterKeyword,
-} from '../actions';
-import { selectLoading, selectFilterKeyword } from '../selectors';
+  selectHeightOptions,
+  selectFloorsOptions,
+  selectYearOptions,
+  selectCityOptions,
+} from './selectors';
 
-export const FilterComponent = ({ handleChange, loading, keyword }) => (
-  <Input
-    fluid
-    icon="filter"
-    placeholder="Filter skyscrapers..."
-    onChange={handleChange}
-    value={keyword}
-    loading={loading}
-  />
+const { Field: SemanticField, Group: SemanticGroup } = SemanticForm;
+
+export const FilterComponent = ({ heightOptions, yearOptions, floorsOptions, cityOptions }) => (
+  <Segment>
+    <SemanticForm>
+      <SemanticGroup widths='equal'>
+        <SemanticField>
+          <ReduxFormField
+            name="keyword"
+            component={InputText}
+            placeholder="Keyword"
+          />
+        </SemanticField>
+
+        <SemanticField>
+          <ReduxFormField
+            name="cities"
+            component={InputDropdown}
+            placeholder="City"
+            options={cityOptions}
+            fluid
+            multiple
+            search
+            selection
+          />
+        </SemanticField>
+      </SemanticGroup>
+
+      <SemanticGroup widths='equal'>
+        <SemanticField>
+          <ReduxFormField
+            name="height"
+            component={InputSelect}
+            label="Height"
+            options={heightOptions}
+          />
+        </SemanticField>
+      
+        <SemanticField>
+          <ReduxFormField
+            name="floors"
+            component={InputSelect}
+            label="Floors"
+            options={floorsOptions}
+          />
+        </SemanticField>
+        <SemanticField>
+          <ReduxFormField
+            name="year"
+            component={InputSelect}
+            label="Year"
+            options={yearOptions}
+          />
+        </SemanticField>
+      </SemanticGroup>
+    </SemanticForm>
+  </Segment>
 );
 
 const mapStateToProps = createStructuredSelector({
-  loading: selectLoading(),
-  keyword: selectFilterKeyword(),
+  heightOptions: selectHeightOptions(),
+  floorsOptions: selectFloorsOptions(),
+  yearOptions: selectYearOptions(),
+  cityOptions: selectCityOptions(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleChange: (ev) => {
-    dispatch(updateFilterKeyword(ev.target.value));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent);
+export default reduxForm({
+  form: 'filter',
+  initialValues: {
+    keyword: "",
+    height: false,
+    floors: false,
+    year: false,
+    cities: [],
+  }
+})(connect(mapStateToProps)(FilterComponent));
