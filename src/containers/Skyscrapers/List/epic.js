@@ -5,8 +5,6 @@ import 'rxjs/add/operator/switchMap';
 import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
-import { LOCATION_CHANGE } from 'react-router-redux';
-import { selectParamKeyword } from 'containers/App/selectors';
 import {
   ajaxFetchStart,
   ajaxFetchEnd,
@@ -14,12 +12,8 @@ import {
 } from '../actions';
 import query from '../schema';
 
-const listEpic = ({ keyword, limit, start} = {}) => {
-  let selector = "";
-  if (keyword) selector += `, title|body*=${keyword}`;
-  if (start) selector += `, start=${start}`;
-  if (limit) selector += `, limit=${limit}`;
-  selector = selector.substr(2);
+const listEpic = (selector = "") => {
+
   return concat$(
 
     // For each ajax request we fire AJAC_FILTER_START action
@@ -41,20 +35,6 @@ const listEpic = ({ keyword, limit, start} = {}) => {
       // fire AJAC_FILTER_FAIL action if request is note successful
       .catch(e => of$(ajaxFetchFail(e)))
   );
-}
-
-export const updateListEpic = (action$, store) =>
-  action$
-    .ofType(LOCATION_CHANGE)
-    .filter(action => action.payload.action === 'POP' && action.payload.pathname === '/')
-    .switchMap(action => {
-      const keyword = selectParamKeyword()(store.getState());
-      return listEpic({ keyword });
-    });
-
-export const initListEpic = (action$, store) => {
-  const keyword = selectParamKeyword()(store.getState());
-  return listEpic({ keyword });
 }
   
 export default listEpic;
