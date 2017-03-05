@@ -1,10 +1,9 @@
 import { fromJS } from 'immutable';
 import { ActionsObservable } from 'redux-observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import {
-  change,
-} from 'redux-form';
-import { selectFilterSelector } from '../selectors';
+import { change } from 'redux-form';
+import { push } from 'react-router-redux';
+import { selectFilterSelector, selectFilterUrl } from '../selectors';
 import SkyscrapersFilterEpic from '../epic';
 import ListEpic from '../../List/epic'
 
@@ -14,6 +13,16 @@ let consumer;
 let subscribtion;
 const store = {
   getState: () => fromJS({
+    route: {
+      locationBeforeTransitions: {
+        pathname:"/cities",
+        search:"",
+        hash:"",
+        action:"PUSH",
+        key:"02ampl",
+        query: {},
+      }
+    },
     form: {
       filter: {
         values: {
@@ -55,7 +64,7 @@ test('SkyscrapersFilterEpic reacts only to redux-form CHANGE action', () => {
   expect(consumer.mock.calls.length).toBe(0);
   action$.next(change('foo', 'bar', 'baz'));
   jest.runAllTimers();
-  expect(consumer.mock.calls.length).toBe(1);
+  expect(consumer.mock.calls.length).toBeGreaterThan(0);
 });
 
 test('SkyscrapersFilterEpic debounces the actions for 300ms', () => {
@@ -64,7 +73,7 @@ test('SkyscrapersFilterEpic debounces the actions for 300ms', () => {
   jest.runTimersToTime(290);
   expect(consumer.mock.calls.length).toBe(0);
   jest.runTimersToTime(310);
-  expect(consumer.mock.calls.length).toBe(1);
+  expect(consumer.mock.calls.length).toBeGreaterThan(0);
 });
 
 test('SkyscrapersFilterEpic switchMaps the stream to ListEpic', () => {
@@ -79,4 +88,18 @@ test('SkyscrapersFilterEpic passes in a pw selector from selectFilterSelector se
   expect(ListEpic.mock.calls.length).toBe(0);
   jest.runAllTimers();
   expect(ListEpic.mock.calls[0][0]).toBe(selectFilterSelector()(store.getState()));
+});
+
+test('SkyscrapersFilterEpic emits the react-router-redux`s push() action to update the location', () => {
+  action$.next(change('foo', 'bar', 'baz'));
+  jest.runAllTimers();
+  const mockCalls = consumer.mock.calls;
+  expect(mockCalls[mockCalls.length - 1][0].type).toBe(push().type);
+});
+
+test('SkyscrapersFilterEpic emits the react-router-redux`s push() action with filterQueryString', () => {
+  action$.next(change('foo', 'bar', 'baz'));
+  jest.runAllTimers();
+  const mockCalls = consumer.mock.calls;
+  expect(mockCalls[mockCalls.length - 1][0].payload).toEqual(push(selectFilterUrl()(store.getState())).payload);
 });

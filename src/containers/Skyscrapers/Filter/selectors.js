@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { formValueSelector } from 'redux-form/immutable';
-import { selectList } from 'containers/Cities/List/selectors';
+import { selectList as selectCitiesList } from 'containers/Cities/List/selectors';
+import { selectPathname } from 'containers/App/selectors';
 
 export const selectHeightOptions = () => () => [
   { key: 'any', text: 'Any', value: "" },
@@ -37,7 +38,7 @@ export const selectYearOptions = () => () => {
 };
 
 export const  selectCityOptions = () => createSelector(
-  selectList(),
+  selectCitiesList(),
   cities => cities.map(item => ({
     key: item.get('id'),
     text: item.get('title'),
@@ -45,16 +46,11 @@ export const  selectCityOptions = () => createSelector(
   })).toJS()
 );
 
-export const selectFilterSelector = () => (state) => {
-  const formValues = formValueSelector('filter')(state, 'keyword', 'cities', 'height', 'floors', 'year');
-  const {
-    keyword,
-    cities,
-    height,
-    floors,
-    year,
-  } = formValues;
-  
+export const selectFilterValues = () =>
+  (state) => formValueSelector('filter')(state, 'keyword', 'cities', 'height', 'floors', 'year');
+
+const buildFilterSelector =   ({ keyword, cities, height, floors, year }) => {
+    
   let selector = "";
 
   // keyword {string} --> 'foo' || ''
@@ -89,4 +85,28 @@ export const selectFilterSelector = () => (state) => {
   }
 
   return selector.substr(2); // remove leading comma and space
-};
+}
+
+export const selectFilterSelector = () => createSelector(
+  selectFilterValues(),
+  buildFilterSelector,
+);
+
+export const selectFilterUrl = () => createSelector(
+  selectPathname(),
+  selectFilterValues(),
+  (pathname, filterValues) => {
+    const filterValuesKeys = Object.keys(filterValues);
+
+    let queryStr = filterValuesKeys.reduce((memo, key) => {
+      const value = key === 'cities' ? filterValues[key].join('|') : filterValues[key];
+      if (value) memo += `${key}=${value}&`;
+      return memo;
+    }, '');
+
+    if (queryStr) queryStr = queryStr.substr(0, queryStr.length - 1); // remove the last `&`
+    let url = pathname;
+    if (queryStr) url += `?${queryStr}`;
+    return url;
+  }
+);

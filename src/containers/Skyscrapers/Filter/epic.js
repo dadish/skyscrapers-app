@@ -1,9 +1,10 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
-import {
-  actionTypes,
-} from 'redux-form';
-import { selectFilterSelector } from './selectors';
+import { concat as concat$ } from 'rxjs/observable/concat';
+import { of as of$ } from 'rxjs/observable/of';
+import { actionTypes } from 'redux-form';
+import { push } from 'react-router-redux';
+import { selectFilterSelector, selectFilterUrl } from './selectors';
 import listEpic from '../List/epic';
 
 const { CHANGE } = actionTypes;
@@ -27,7 +28,10 @@ const epic = (action$, store) =>
     // one comes in with values that allows us handle AJAX cancellation
     .switchMap(() => {
       const selector = selectFilterSelector()(store.getState());
-      return listEpic(selector);
+      return concat$(
+        listEpic(selector),
+        of$(push(selectFilterUrl()(store.getState()))),
+      );
     });
 
 export default epic;
