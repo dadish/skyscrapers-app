@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectPathname } from 'containers/App/selectors';
+import { selectLocationPathname } from 'containers/App/selectors';
 import { push } from 'react-router-redux';
 import { Menu } from 'semantic-ui-react';
 
@@ -17,7 +17,7 @@ export const HeaderComponent = ({ currentPathname, goTo }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentPathname: selectPathname(),
+  currentPathname: selectLocationPathname(),
 });
 
 const mapDispatchToProps = dispatch => ({

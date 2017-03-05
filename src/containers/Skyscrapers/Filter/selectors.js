@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { formValueSelector } from 'redux-form/immutable';
 import { selectList as selectCitiesList } from 'containers/Cities/List/selectors';
-import { selectPathname } from 'containers/App/selectors';
+import { selectLocationPathname } from 'containers/App/selectors';
 
 export const selectHeightOptions = () => () => [
   { key: 'any', text: 'Any', value: "" },
@@ -87,7 +87,7 @@ export const selectFilterSelector = () => createSelector(
 );
 
 export const selectFilterUrl = () => createSelector(
-  selectPathname(),
+  selectLocationPathname(),
   selectFilterValues(),
   (pathname, filterValues) => {
     const filterValuesKeys = Object.keys(filterValues);

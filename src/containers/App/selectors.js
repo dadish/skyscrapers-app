@@ -7,12 +7,17 @@ export const selectLocation = () => createSelector(
   route => route.get('locationBeforeTransitions'),
 );
 
-export const selectPathname = () => createSelector(
+export const selectLocationPathname = () => createSelector(
   selectLocation(),
   location => location.get('pathname'),
 );
 
-export const selectQuery = () => createSelector(
+export const selectLocationSearch = () => createSelector(
+  selectLocation(),
+  location => location.get('search'),
+);
+
+export const selectLocationQuery = () => createSelector(
   selectLocation(),
   location => location.get('query'),
 )

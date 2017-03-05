@@ -4,13 +4,13 @@ import 'rxjs/add/operator/switchMap'
 import { from as from$ } from 'rxjs/observable/from'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { change } from 'redux-form';
-import { selectPathname, selectQuery } from 'containers/App/selectors'
+import { selectLocationPathname, selectLocationQuery } from 'containers/App/selectors'
 
 
 const updateFilter = (action$, store) =>
   action$
     .filter(({ type, payload}) => {
-      const pathname = selectPathname()(store.getState());
+      const pathname = selectLocationPathname()(store.getState());
       return (
         type === LOCATION_CHANGE &&
         payload.action === 'POP' &&
@@ -18,7 +18,7 @@ const updateFilter = (action$, store) =>
       );
     })
     .switchMap(() => {
-      const filterQuery = selectQuery()(store.getState());
+      const filterQuery = selectLocationQuery()(store.getState());
       const actions = ['keyword', 'cities', 'height', 'floors', 'year'].map((key) => {
         let value = filterQuery.get(key) || "";
         if (key === 'cities') {

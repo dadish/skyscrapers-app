@@ -2,7 +2,7 @@ import { fromJS } from 'immutable'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { ActionsObservable } from 'redux-observable'
 import { ReplaySubject } from 'rxjs/ReplaySubject'
-import { selectQuery } from 'containers/App/selectors'
+import { selectLocationQuery } from 'containers/App/selectors'
 import updateFilterEpic from '../updateFilterEpic'
 
 let action$;
@@ -79,7 +79,7 @@ test('updateFilterEpic reacts only to location with pathname `/`', () => {
 });
 
 test('updateFilterEpic emits redux-form change() action for each key/value pairs in location query', () => {
-  const filterQuery = selectQuery()(store.getState());
+  const filterQuery = selectLocationQuery()(store.getState());
   action$.next({ type: LOCATION_CHANGE, payload: { action: 'POP' }});
   expect(consumer.mock.calls.length).toBe(filterQuery.size);
 });
