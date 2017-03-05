@@ -16,8 +16,3 @@ export const selectQuery = () => createSelector(
   selectLocation(),
   location => location.get('query'),
 )
-
-export const selectParamKeyword = () => createSelector(
-  selectQuery(),
-  query => query.get('keyword'),
-);
