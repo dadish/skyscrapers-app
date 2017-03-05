@@ -4,6 +4,7 @@ import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { actionTypes } from 'redux-form';
 import { push } from 'react-router-redux';
+import { selectLocationSearch } from 'containers/App/selectors';
 import { selectFilterSelector, selectFilterUrl } from './selectors';
 import listEpic from '../List/epic';
 
@@ -28,9 +29,14 @@ const epic = (action$, store) =>
     // one comes in with values that allows us handle AJAX cancellation
     .switchMap(() => {
       const selector = selectFilterSelector()(store.getState());
+      const searchStr = selectLocationSearch()(store.getState());
+      const filterStr = selectFilterUrl()(store.getState());
+      if (searchStr === filterStr) {
+        return listEpic(selector);
+      }
       return concat$(
         listEpic(selector),
-        of$(push(selectFilterUrl()(store.getState()))),
+        of$(push(filterStr)),
       );
     });
 
