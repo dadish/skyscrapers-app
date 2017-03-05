@@ -5,7 +5,6 @@ import {
   ajaxFetchStart,
   ajaxFetchEnd,
   ajaxFetchFail,
-  updateFilterKeyword,
 } from '../actions';
 
 jest.mock('../List/reducer', () => jest.fn());
@@ -29,11 +28,6 @@ test('sets the `loading` property to `false` on AJAX_FETCH_FAIL action', () => {
   const state = initialState.set('loading', true);
   expect(state.get('loading')).toBe(true);
   expect(reducer(state, ajaxFetchFail()).get('loading')).toBe(false);
-});
-
-test('updates the keyword with payload on UPDATE_FILTER_KEYWORD action', () => {
-  const payload = 'admfsygjbwnla';
-  expect(reducer(initialState, updateFilterKeyword(payload)).get('keyword')).toBe(payload);
 });
 
 test('updates the keyword according to browser URL query on LOCATION_CHANGE action with POP location action type', () => {

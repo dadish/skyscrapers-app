@@ -6,8 +6,3 @@ export const selectLoading = () => createSelector(
   selectSkyscrapers(),
   skyscrapers => skyscrapers.get('loading'),
 );
-
-export const selectFilterKeyword = () => createSelector(
-  selectSkyscrapers(),
-  skyscrapers => skyscrapers.get('keyword'),
-);
