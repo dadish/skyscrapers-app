@@ -1,16 +1,14 @@
 {
   "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Chrome",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceRoot}/src",
-      "userDataDir": "${workspaceRoot}/.chrome",
-      "sourceMapPathOverrides": {
-          "webpack:///src/*": "${webRoot}/*"
-      }
+  "configurations": [{
+    "name": "Chrome",
+    "type": "chrome",
+    "request": "launch",
+    "url": "http://localhost:3000",
+    "webRoot": "${workspaceRoot}/src",
+    "userDataDir": "${workspaceRoot}/.vscode/chrome",
+    "sourceMapPathOverrides": {
+      "webpack:///src/*": "${webRoot}/*"
     }
-  ]
+  }]
 }
