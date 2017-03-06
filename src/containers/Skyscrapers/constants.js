@@ -26,3 +26,8 @@ export const AJAX_FETCH_FAIL = 'skyscrapers/Skyscrapers/AJAX_FETCH_FAIL';
  * The user visited the page the first time 
  */
 export const INITIAL_LOAD = 'skyscrapers/Skyscrapers/INITIAL_LOAD';
+
+/**
+ * The Wikipedia API url suffixed with `?origin=*`
+ */
+export const WIKIPEDIA_API_URL = 'https://en.wikipedia.org/w/api.php?origin=*';
