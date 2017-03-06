@@ -3,8 +3,13 @@ import 'rxjs/add/operator/filter'
 import 'rxjs/add/operator/switchMap'
 import { from as from$ } from 'rxjs/observable/from'
 import { LOCATION_CHANGE } from 'react-router-redux'
-import { change, actionTypes } from 'redux-form';
-import { selectLocationPathname, selectLocationQuery } from 'containers/App/selectors'
+import { change, actionTypes } from 'redux-form'
+import {
+  selectLocationSearch,
+  selectLocationQuery,
+  selectLocationPathname,
+} from 'containers/App/selectors'
+import { selectFilterUrl } from './selectors'
 
 const { INITIALIZE } = actionTypes;
 
@@ -29,11 +34,14 @@ export const initFilterForm = (action$, store) =>
 const updateFilterForm = (action$, store) =>
   action$
     .filter(({ type, payload}) => {
-      const pathname = selectLocationPathname()(store.getState());
+      const state = store.getState();
+      const pathname = selectLocationPathname()(state);
+      const searchStr = selectLocationSearch()(state);
+      const filterStr = selectFilterUrl()(state);
       return (
-        type === LOCATION_CHANGE &&
-        payload.action === 'POP' &&
-        pathname === '/'
+        type === LOCATION_CHANGE && // ignore all actions except location change
+        `${pathname}${searchStr}` !== filterStr && // ignore if filter form and url search is the same
+        pathname === '/' // ignore all actions if we are not in root page
       );
     })
     .switchMap(() => changeFilterForm(action$, store))

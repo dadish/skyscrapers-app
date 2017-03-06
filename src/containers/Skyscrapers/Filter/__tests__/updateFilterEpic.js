@@ -61,25 +61,20 @@ test('updateFilterFormEpic reacts only to LOCATION_CHANGE action type', () => {
   expect(consumer).not.toHaveBeenCalled();
 });
 
-test('updateFilterFormEpic reacts only to location POP action', () => {
-  action$.next({ type: LOCATION_CHANGE, payload: { action: 'not POP' } });
-  expect(consumer).not.toHaveBeenCalled();
-});
-
 test('updateFilterFormEpic reacts only to location with pathname `/`', () => {
   state = state.setIn(['route', 'locationBeforeTransitions', 'pathname'], '/cities');
-  action$.next({ type: LOCATION_CHANGE, payload: { action: 'POP' }});
+  action$.next({ type: LOCATION_CHANGE });
   expect(consumer).not.toHaveBeenCalled();
 });
 
 test('updateFilterFormEpic reacts only to location with pathname `/`', () => {
   state = state.setIn(['route', 'locationBeforeTransitions', 'pathname'], '/');
-  action$.next({ type: LOCATION_CHANGE, payload: { action: 'POP' }});
+  action$.next({ type: LOCATION_CHANGE });
   expect(consumer).toHaveBeenCalled();
 });
 
 test('updateFilterFormEpic emits redux-form change() action for each key/value pairs in location query', () => {
   const filterQuery = selectLocationQuery()(store.getState());
-  action$.next({ type: LOCATION_CHANGE, payload: { action: 'POP' }});
+  action$.next({ type: LOCATION_CHANGE });
   expect(consumer.mock.calls.length).toBe(filterQuery.size);
 });
