@@ -1,7 +1,9 @@
+import { List } from 'immutable';
+import { isNumeric } from 'rxjs/util/isNumeric';
 import { createSelector } from 'reselect';
 import { formValueSelector } from 'redux-form/immutable';
 import { selectList as selectCitiesList } from 'containers/Cities/List/selectors';
-import { selectLocationPathname } from 'containers/App/selectors';
+import { selectLocation, selectLocationPathname } from 'containers/App/selectors';
 
 export const selectHeightOptions = () => () => [
   { key: 'any', text: 'Any', value: "" },
@@ -30,7 +32,7 @@ export const selectYearOptions = () => () => {
     options.push({
       key: i,
       text: `${i}s`,
-      value: i,
+      value: String(i),
     });
   }
 
@@ -104,3 +106,36 @@ export const selectFilterUrl = () => createSelector(
     return url;
   }
 );
+
+export const selectSanitizedLocationQuery = () => createSelector(
+  selectLocation(),
+  selectHeightOptions(),
+  selectFloorsOptions(),
+  selectYearOptions(),
+  (location, heightOptions, floorsOptions, yearOptions) =>
+    ['keyword', 'cities', 'height', 'floors', 'year'].reduce((query, key) => {
+      let value = query.get(key);
+      if (value instanceof List) value = value.join('|');
+      let target;
+      if (!value) return query;
+      switch (key) {
+        case 'keyword':
+          return query.set(key, String(value));
+        case 'cities':
+          const cityIds = value.split('|');
+          const validCityIds = cityIds.filter(id => isNumeric(id));
+          return query.set(key, validCityIds.join('|'));
+        case 'height':
+          target = heightOptions.find(item => item.value === value) || "";
+          return query.set(key, target.value);
+        case 'floors':
+          target = floorsOptions.find(item => item.value === value) || "";
+          return query.set(key, target.value);
+        case 'year':
+          target = yearOptions.find(item => item.value === value) || "";
+          return query.set(key, target.value);
+        default:
+          return query;
+      }
+    }, location.get('query'))
+)

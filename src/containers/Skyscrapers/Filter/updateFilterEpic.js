@@ -6,15 +6,14 @@ import { LOCATION_CHANGE } from 'react-router-redux'
 import { change, actionTypes } from 'redux-form'
 import {
   selectLocationSearch,
-  selectLocationQuery,
   selectLocationPathname,
 } from 'containers/App/selectors'
-import { selectFilterUrl } from './selectors'
+import { selectFilterUrl, selectSanitizedLocationQuery } from './selectors'
 
 const { INITIALIZE } = actionTypes;
 
 export const changeFilterForm = (_, store) => {
-  const filterQuery = selectLocationQuery()(store.getState());
+  const filterQuery = selectSanitizedLocationQuery()(store.getState());
   const actions = ['keyword', 'cities', 'height', 'floors', 'year'].map((key) => {
     let value = filterQuery.get(key) || "";
     if (key === 'cities') {
