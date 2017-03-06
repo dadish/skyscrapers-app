@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Card} from 'semantic-ui-react';
-import { selectList } from './selectors';
+import { selectFilteredList } from './selectors';
 import Item from '../Item';
 
 export const ListComponent = ({ list, loading }) => {
@@ -14,7 +14,7 @@ export const ListComponent = ({ list, loading }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  list: selectList(),
+  list: selectFilteredList(),
 });
 
 export default connect(mapStateToProps)(ListComponent);
