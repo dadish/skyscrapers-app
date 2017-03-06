@@ -5,3 +5,8 @@ export const selectList = () => createSelector(
   selectSkyscrapers(),
   skyscrapers => skyscrapers.get('list'),
 );
+
+export const selectItemsWithoutImages = () => createSelector(
+  selectList(),
+  list => list.filter(item => !item.get('image')),
+);
