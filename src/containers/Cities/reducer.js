@@ -8,7 +8,7 @@ import {
 
 export const initialState = fromJS({
   list: initialListState,
-  loading: false,
+  filterTxt: "",
 });
 
 const reducer = (state = initialState, action) => {
