@@ -4,7 +4,10 @@ import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { actionTypes } from 'redux-form';
 import { push } from 'react-router-redux';
-import { selectLocationSearch } from 'containers/App/selectors';
+import {
+  selectLocationPathname,
+  selectLocationSearch,
+} from 'containers/App/selectors';
 import { selectFilterSelector, selectFilterUrl } from './selectors';
 import listEpic from '../List/epic';
 
@@ -28,12 +31,21 @@ const epic = (action$, store) =>
     // time it automatically unsubscribes the previous observables when new
     // one comes in with values that allows us handle AJAX cancellation
     .switchMap(() => {
-      const selector = selectFilterSelector()(store.getState());
-      const searchStr = selectLocationSearch()(store.getState());
-      const filterStr = selectFilterUrl()(store.getState());
-      if (searchStr === filterStr) {
+      const state = store.getState();
+      const pathname = selectLocationPathname()(state);
+      const selector = selectFilterSelector()(state);
+      const searchStr = selectLocationSearch()(state);
+      const filterStr = selectFilterUrl()(state);
+
+      // only renew the skyscrapers list if filter and url have the
+      // same state
+      if (`${pathname}${searchStr}` === filterStr) {
         return listEpic(selector);
       }
+
+      // if filterForm data and url search query have different state
+      // then after we renew the skyscrapers list, we also udpate the
+      // url to support filtering with url
       return concat$(
         listEpic(selector),
         of$(push(filterStr)),
