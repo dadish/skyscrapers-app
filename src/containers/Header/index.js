@@ -8,7 +8,12 @@ import { Menu } from 'semantic-ui-react';
 export const HeaderComponent = ({ currentPathname, goTo }) => {
   const { Item } = Menu;
   return (
-    <Menu pointing secondary size="massive">
+    <Menu
+      pointing
+      secondary
+      size="massive"
+      color="blue"
+    >
       <Item name="home" active={currentPathname === '/'} onClick={goTo('/')}>Home</Item>
       <Item name="cities" active={currentPathname === '/cities'} onClick={goTo('/cities')}>Cities</Item>
       <Item name="about" active={currentPathname === '/about'} onClick={goTo('/about')}>About</Item>
