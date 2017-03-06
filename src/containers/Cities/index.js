@@ -1,11 +1,11 @@
 import React from 'react';
 import List from './List';
-import Search from './Search';
+import Filter from './Filter';
 import { Divider } from 'semantic-ui-react';
 
 const CitiesComponent = () => (
   <div>
-    <Search />
+    <Filter />
     <Divider hidden />
     <List />
   </div>

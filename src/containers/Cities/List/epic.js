@@ -20,7 +20,7 @@ const listCities = ({ limit, start } = {}) => {
   selector = selector.substr(2);
   return concat$(
 
-    // For each ajax request we fire AJAC_SEARCH_START action
+    // For each ajax request we fire AJAX_FILTER_START action
     of$(ajaxFetchStart()),
 
     // make an ajax request
@@ -36,7 +36,7 @@ const listCities = ({ limit, start } = {}) => {
       // fire AJAX_FETCH_END action when successfully requested
       .map((xhr) => ajaxFetchEnd(xhr.response))
 
-      // fire AJAC_SEARCH_FAIL action if request is note successful
+      // fire AJAX_FILTER_FAIL action if request is note successful
       .catch(e => of$(ajaxFetchFail(e)))
   );
 }

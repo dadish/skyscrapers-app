@@ -1,12 +1,12 @@
 import {
-  changeSearchTxt,
+  changeFilterTxt,
   ajaxFetchStart,
   ajaxFetchEnd,
   ajaxFetchFail,
   initialLoad,
 } from '../actions';
 import {
-  CHANGE_SEARCH_TXT,
+  CHANGE_FILTER_TXT,
   AJAX_FETCH_START,
   AJAX_FETCH_END,
   AJAX_FETCH_FAIL,
@@ -14,9 +14,9 @@ import {
 } from '../constants';
 
 const actionsMap = {
-  changeSearchTxt: {
-    method: changeSearchTxt,
-    type: CHANGE_SEARCH_TXT
+  changeFilterTxt: {
+    method: changeFilterTxt,
+    type: CHANGE_FILTER_TXT
   },
   ajaxFetchStart: {
     method: ajaxFetchStart,

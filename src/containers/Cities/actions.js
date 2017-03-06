@@ -1,6 +1,6 @@
 import createActionCreator from 'utils/createActionCreator';
 import {
-  CHANGE_SEARCH_TXT,
+  CHANGE_FILTER_TXT,
   AJAX_FETCH_START,
   AJAX_FETCH_END,
   AJAX_FETCH_FAIL,
@@ -10,7 +10,7 @@ import {
 /**
  * When the user updates the search text
  */
-export const changeSearchTxt = createActionCreator(CHANGE_SEARCH_TXT);
+export const changeFilterTxt = createActionCreator(CHANGE_FILTER_TXT);
 
 /**
  * The AJAX search request for matching cities starts

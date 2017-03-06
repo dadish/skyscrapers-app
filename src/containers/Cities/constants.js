@@ -5,7 +5,7 @@
 /**
  * When the user updates the search text
  */
-export const CHANGE_SEARCH_TXT = 'skyscrapers/Cities/CHANGE_SEARCH_TXT';
+export const CHANGE_FILTER_TXT = 'skyscrapers/Cities/CHANGE_FILTER_TXT';
 
 /**
  * The AJAX search request for matching skyscrapers starts
