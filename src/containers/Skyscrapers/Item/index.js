@@ -22,7 +22,7 @@ export const ItemComponent = (props) => {
       <Image fluid src="https://placehold.it/200/" alt={skyscraper.get('title')} />
       <CardContent>
         <CardHeader>{skyscraper.get('title')}</CardHeader>
-        {city && <a href={`/cities/${city.get('id')}`} onClick={goToCityPage(city.get('id'))}>{city.get('title')}</a>}
+        {city && <a href={`/?cities=${city.get('id')}`} onClick={goToCityPage(city.get('id'))}>{city.get('title')}</a>}
       </CardContent>
       <CardContent extra>
         {floors && <Statistic value={floors} label="floors" size="mini"/>}
@@ -39,7 +39,7 @@ const mapStateToProps = () => (state, { skyscraper }) => ({
 const mapDispatchToProps = dispatch => ({
   goToCityPage: id => ev => {
     ev.preventDefault();
-    dispatch(push(`/cities/${id}`))
+    dispatch(push(`?cities=${id}`))
   }
 });
 
