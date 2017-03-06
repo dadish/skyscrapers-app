@@ -61,21 +61,21 @@ export default function createRoutes(store) {
               renderRoute(require('containers/Cities'));
             })
           },
+        }, {
+          path: '/about',
+          name: 'about',
+          getComponent(nextState, cb) {
+            require.ensure([
+              'containers/AboutPage'
+            ], (require) => {
+              const renderRoute = loadModule(cb);
+              const component = require('containers/AboutPage');
+              renderRoute(component);
+            })
+          },
         }
       ]
     }, {
-      path: '/about',
-      name: 'about',
-      getComponent(nextState, cb) {
-        require.ensure([
-          'containers/AboutPage'
-        ], (require) => {
-          const renderRoute = loadModule(cb);
-          const component = require('containers/AboutPage');
-          renderRoute(component);
-        })
-      },
-    },  {
       path: '*',
       name: 'notFound',
       getComponent(nextState, cb) {
