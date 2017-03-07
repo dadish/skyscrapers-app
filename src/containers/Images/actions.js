@@ -2,6 +2,11 @@ import createActionCreator from 'utils/createActionCreator';
 import * as c from './constants';
 
 /**
+ * Initiate the image discovery from wikipedia
+ */
+export const ajaxGetImages = createActionCreator(c.AJAX_GET_IMAGES);
+
+/**
  * Auto image title resolver start
  */
 export const ajaxImageTitleFetchStart = createActionCreator(c.AJAX_IMG_TTL_FETCH_START);
