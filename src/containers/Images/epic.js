@@ -4,10 +4,8 @@ import 'rxjs/add/operator/switchMap';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
-import { AJAX_FETCH_END } from '../constants';
 import * as c from './constants';
 import * as a from './actions';
-import { selectImagelessWikipediaIds } from '../List/selectors';
 
 /**
  * Makes an AJAX request to en.wikipedia.org/w/api.php and returns an AJAX observable
@@ -42,9 +40,9 @@ export const getImagePageTitlesEpic = (pageIds) => {
     
 export const imagesEpic = (action$, store) => {
   return action$
-    .ofType(AJAX_FETCH_END)
+    .ofType('AJAX_FETCH_END')
     .switchMap((action) => {
-      const ids = selectImagelessWikipediaIds()(store.getState());
+      const ids = action.payload;
       return getImagePageTitlesEpic(ids)
   });
 };

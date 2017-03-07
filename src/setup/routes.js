@@ -20,10 +20,14 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         require.ensure([
-          'containers/HomePage'
+          'containers/HomePage',
+          'containers/Images/reducer',
+          'containers/Images/epic',
         ], (require) => {
           const renderRoute = loadModule(cb);
           renderRoute(require('containers/HomePage'));
+          injectEpic('images', require('containers/Images/epic').default);
+          injectReducer('images', require('containers/Images/reducer').default);
         })
       },
       indexRoute: {
@@ -31,7 +35,6 @@ export default function createRoutes(store) {
         getComponent(nextState, cb) {
           require.ensure([
             'containers/Skyscrapers/reducer',
-            'containers/Skyscrapers/WikipediaImages/reducer',
             'containers/Skyscrapers/epic',
             'containers/Cities/reducer',
             'containers/Cities/epic',
@@ -40,7 +43,6 @@ export default function createRoutes(store) {
             const renderRoute = loadModule(cb);
             injectEpic('skyscrapers', require('containers/Skyscrapers/epic').default);
             injectReducer('skyscrapers', require('containers/Skyscrapers/reducer').default);
-            injectReducer('wikipedia', require('containers/Skyscrapers/WikipediaImages/reducer').default);
             injectEpic('cities', require('containers/Cities/epic').default);
             injectReducer('cities', require('containers/Cities/reducer').default);
             renderRoute(require('containers/Skyscrapers'));
