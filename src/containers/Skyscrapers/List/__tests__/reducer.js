@@ -1,12 +1,13 @@
 import reducer, { initialState } from '../reducer';
+import itemReducer from '../itemReducer';
 import {
   ajaxFetchEnd,
 } from '../../actions';
 
 const list = [
-  { id: 1, data: 'one'},
-  { id: 2, data: 'two'},
-  { id: 3, data: 'three'},
+  { id: 1, title: 'one'},
+  { id: 2, title: 'two'},
+  { id: 3, title: 'three'},
 ];
 
 const payload = {
@@ -24,5 +25,5 @@ test('it returns the provided state untouched for unknown actions', () => {
 test('resets all the list on AJAX_FETCH_END action', () => {
   const newState = reducer(initialState, ajaxFetchEnd(payload));
   expect(newState.size).toBe(list.length);
-  expect(newState.get(0).toJS()).toEqual(list[0]);
+  expect(newState.get(0)).toEqual(itemReducer(undefined, ajaxFetchEnd(list[0])));
 });
