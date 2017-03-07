@@ -40,7 +40,7 @@ export const getImagePageTitlesEpic = (pageIds) => {
     
 export const imagesEpic = (action$, store) => {
   return action$
-    .ofType('AJAX_FETCH_END')
+    .ofType(c.AJAX_GET_IMAGES)
     .switchMap((action) => {
       const ids = action.payload;
       return getImagePageTitlesEpic(ids)
