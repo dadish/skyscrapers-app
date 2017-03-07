@@ -6,7 +6,9 @@ export const selectList = () => createSelector(
   skyscrapers => skyscrapers.get('list'),
 );
 
-export const selectItemsWithoutImages = () => createSelector(
+export const selectImagelessWikipediaIds = () => createSelector(
   selectList(),
-  list => list.filter(item => !item.get('image')),
-);
+  list => list
+    .filter(item => !item.get('images'))
+    .map(item => item.get('wikipedia_id'))
+)

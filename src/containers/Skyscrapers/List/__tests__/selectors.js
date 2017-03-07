@@ -1,16 +1,16 @@
 import { fromJS } from 'immutable';
 import {
   selectList,
-  selectItemsWithoutImages,
+  selectImagelessWikipediaIds,
 } from '../selectors';
 
 const list = [
-  { id: "1234", title: 'The awesome skyscraper!'},
-  { id: "2334", title: 'Not so awesome skyscraper!', image: 'https://wikipedia.org/my_image,jpg'},
-  { id: "1434", title: 'The awesome skyscraper!'},
-  { id: "2534", title: 'Not so awesome skyscraper!', image: 'https://wikipedia.org/my_image,jpg'},
-  { id: "1634", title: 'The awesome skyscraper!'},
-  { id: "2734", title: 'Not so awesome skyscraper!', image: 'https://wikipedia.org/my_image,jpg'},  
+  { id: "1234", wikipedia_id: 123423, title: 'The awesome skyscraper!'},
+  { id: "2334", wikipedia_id: 233423, title: 'Not so awesome skyscraper!', images: []},
+  { id: "1434", wikipedia_id: 143423, title: 'The awesome skyscraper!'},
+  { id: "2534", wikipedia_id: 253423, title: 'Not so awesome skyscraper!', images: []},
+  { id: "1634", wikipedia_id: 163423, title: 'The awesome skyscraper!'},
+  { id: "2734", wikipedia_id: 273423, title: 'Not so awesome skyscraper!', images: []},  
 ];
 
 const state = fromJS({
@@ -23,7 +23,7 @@ test('selectList selects [`skyscrapers`, `list`]', () => {
   expect(selectList()(state).toJS()).toEqual(list);
 });
 
-test('selectItemsWithoutImages selects skyscrapers with falsy `image` field', () => {
-  expect(selectItemsWithoutImages()(state).size).toBe(3);
-  expect(selectItemsWithoutImages()(state).get(0).get('id')).toBe("1234");
+test('selectImagelessWikipediaIds selects skyscrapers with falsy `image` field', () => {
+  expect(selectImagelessWikipediaIds()(state).size).toBe(3);
+  expect(selectImagelessWikipediaIds()(state).get(0)).toBe(123423);
 });
