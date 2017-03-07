@@ -16,7 +16,6 @@ const initialItemState = fromJS({
   architects: {
     list: [],
   },
-  images: []
 })
 
 const itemReducer = (state = initialItemState, action) => {
