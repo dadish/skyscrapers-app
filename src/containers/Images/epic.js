@@ -6,6 +6,7 @@ import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import * as c from './constants';
 import * as a from './actions';
+import { selectImagelessPageIds } from './selectors';
 
 /**
  * Makes an AJAX request to en.wikipedia.org/w/api.php and returns an AJAX observable
@@ -42,8 +43,8 @@ export const imagesEpic = (action$, store) => {
   return action$
     .ofType(c.AJAX_GET_IMAGES)
     .switchMap((action) => {
-      const ids = action.payload;
-      return getImagePageTitlesEpic(ids)
+      const ids = selectImagelessPageIds(action.payload)(store.getState());
+      return getImagePageTitlesEpic(ids);
   });
 };
 
