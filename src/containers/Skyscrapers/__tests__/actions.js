@@ -1,32 +1,22 @@
-import {
-  ajaxFetchStart,
-  ajaxFetchEnd,
-  ajaxFetchFail,
-  initialLoad,
-} from '../actions';
-import {
-  AJAX_FETCH_START,
-  AJAX_FETCH_END,
-  AJAX_FETCH_FAIL,
-  INITIAL_LOAD,
-} from '../constants';
+import * as a from '../actions';
+import * as c from '../constants';
 
 const actionsMap = {
   ajaxFetchStart: {
-    method: ajaxFetchStart,
-    type: AJAX_FETCH_START
+    method: a.ajaxFetchStart,
+    type: c.AJAX_FETCH_START
   },
   ajaxFetchEnd: {
-    method: ajaxFetchEnd,
-    type: AJAX_FETCH_END
+    method: a.ajaxFetchEnd,
+    type: c.AJAX_FETCH_END
   },
   ajaxFetchFail: {
-    method: ajaxFetchFail,
-    type: AJAX_FETCH_FAIL
+    method: a.ajaxFetchFail,
+    type: c.AJAX_FETCH_FAIL
   },
   initialLoad: {
-    method: initialLoad,
-    type: INITIAL_LOAD
+    method: a.initialLoad,
+    type: c.INITIAL_LOAD
   },
 };
 
