@@ -1,4 +1,9 @@
 /**
+ * The name of the module
+ */
+export const NAME = 'images';
+
+/**
  * Initiate the image discovery from wikipedia
  */
 export const AJAX_GET_IMAGES = 'skyscrapers/Images/AJAX_GET_IMAGES';

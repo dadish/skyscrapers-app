@@ -3,6 +3,11 @@
  */
 
 /**
+ * The name of this module
+ */
+export const NAME = 'skyscrapers';
+
+/**
  * When the user updates the filter text
  */
 export const UPDATE_FILTER_KEYWORD = 'skyscrapers/Skyscrapers/UPDATE_FILTER_KEYWORD';

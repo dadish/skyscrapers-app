@@ -3,6 +3,11 @@
  */
 
 /**
+ * The name of this module
+ */
+export const NAME = 'cities';
+
+/**
  * When the user updates the search text
  */
 export const CHANGE_FILTER_TXT = 'skyscrapers/Cities/CHANGE_FILTER_TXT';
