@@ -4,16 +4,10 @@ import 'rxjs/add/operator/switchMap';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
-import {
-  WIKIPEDIA_API_URL,
-  AJAX_FETCH_END,
-} from '../constants';
-import {
-  ajaxImageTitleFetchStart,
-  ajaxImageTitleFetchEnd,
-  ajaxImageTitleFetchFail,
-} from '../actions';
-import { selectImagelessWikipediaIds } from './selectors';
+import { AJAX_FETCH_END } from '../constants';
+import * as c from './constants';
+import * as a from './actions';
+import { selectImagelessWikipediaIds } from '../List/selectors';
 
 /**
  * Makes an AJAX request to en.wikipedia.org/w/api.php and returns an AJAX observable
@@ -37,12 +31,12 @@ export const fetchWikipediaApi = (url) =>
  * you want the images for
  */
 export const getImagePageTitlesEpic = (pageIds) => {
-  const url = `${WIKIPEDIA_API_URL}&action=query&pageids=${pageIds.join('|')}&prop=images&imlimit=500`;
+  const url = `${c.WIKIPEDIA_API_URL}&action=query&pageids=${pageIds.join('|')}&prop=images&imlimit=500`;
   return concat$(
-    of$(ajaxImageTitleFetchStart()),
+    of$(a.ajaxImageTitleFetchStart()),
     fetchWikipediaApi(url)
-      .map((xhr) => ajaxImageTitleFetchEnd(xhr.response.query.pages))
-      .catch(err => of$(ajaxImageTitleFetchFail(err)))
+      .map((xhr) => a.ajaxImageTitleFetchEnd(xhr.response.query.pages))
+      .catch(err => of$(a.ajaxImageTitleFetchFail(err)))
   );
 }
     
