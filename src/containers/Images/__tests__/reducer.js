@@ -33,6 +33,6 @@ test('reducer returns the same state for unknown actions', () => {
 
 test('reducer appends the items in the payload to the state on AJAX_IMG_TTL_END action', () => {
   const newState = reducer(initialState, a.ajaxImageTitleFetchEnd(payload))
-  expect(newState.get(0)).toEqual({ pageId: firstPageId, title: firstTitle })
-  expect(newState.get(3)).toEqual({ pageId: secondPageId, title: fourthTitle })
+  expect(newState.get(0).toJS()).toEqual({ pageId: firstPageId, title: firstTitle })
+  expect(newState.get(3).toJS()).toEqual({ pageId: secondPageId, title: fourthTitle })
 })

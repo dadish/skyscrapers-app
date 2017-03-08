@@ -41,4 +41,4 @@ export const AJAX_IMG_FETCH_FAIL = 'skyscrapers/Images/AJAX_IMG_FETCH_FAIL';
 /**
  * The Wikipedia API url suffixed with default params like format, formatversion, origin...
  */
-export const WIKIPEDIA_API_URL = 'https://en.wikipedia.org/w/api.php?origin=*&formatversion=2&format=json';
+export const WIKIPEDIA_API_URL = 'https://en.wikipedia.org/w/api.php?origin=*&formatversion=2&format=json&action=query';

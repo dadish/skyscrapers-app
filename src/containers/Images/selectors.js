@@ -22,3 +22,20 @@ export const selectImagelessPageIds = (name) => createSelector(
     return ids;
   }, [])
 );
+
+const checkForJpg = new RegExp('jpe?g$', 'i');
+export const selectImagelessPageTitles = (name) => createSelector(
+  selectListSelector(name),
+  selectImages(),
+  (list, images) => list.reduce((titles, item) => {
+    const pageId = item.get('wikipedia_id');
+    const image = images.find((img) => {
+      if (img.get('pageId') !== pageId) return false;
+      if (img.get('url')) return false;
+      if (!checkForJpg.test(img.get('title'))) return false;
+      return true;
+    });
+    if (image) titles.push(image.get('title'));
+    return titles;
+  }, [])
+);

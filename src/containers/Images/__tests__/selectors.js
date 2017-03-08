@@ -1,7 +1,10 @@
 import { fromJS } from 'immutable';
-import { selectImagelessPageIds } from '../selectors';
-import * as cSky from 'containers/skyscrapers/constants';
-import * as cCity from 'containers/skyscrapers/constants';
+import {
+  selectImagelessPageIds,
+  selectImagelessPageTitles,
+} from '../selectors';
+import * as cSky from 'containers/Skyscrapers/constants';
+import * as cCity from 'containers/Cities/constants';
 
 const state = fromJS({
   skyscrapers: {
@@ -23,16 +26,20 @@ const state = fromJS({
     ],
   },
   images: [
-    { pageId: 3, title: '___', url: 'adfjgmsa.jpg'},
-    { pageId: 4, title: '___' },
-    { pageId: 5, title: '___', url: 'adfjgmsa.jpg'},
-    { pageId: 6, title: '___' },
-    { pageId: 7, title: '___', url: 'adfjgmsa.jpg'},
-    { pageId: 8, title: '___'},
-    { pageId: 9, title: '___', url: 'adfjgmsa.jpg'},
-    { pageId: 10, title: '___'},
-    { pageId: 11, title: '___'},
-    { pageId: 12, title: '___'},
+    { pageId: 3, title: 'title - 3.jpg', url: 'adfjgmsa.jpg'},
+    { pageId: 4, title: 'title - 4.jpg'}, // sky
+    { pageId: 4, title: 'title - 4.jpg', url: 'adfjgmsa.jpg'},
+    { pageId: 5, title: 'title - 5.jpg', url: 'adfjgmsa.jpg'},
+    { pageId: 6, title: 'title - 6.jpg'}, // city
+    { pageId: 7, title: 'title - 7.jpg', url: 'adfjgmsa.jpg'},
+    { pageId: 8, title: 'title - 8.jpg'}, // city
+    { pageId: 9, title: 'title - 9.jpg', url: 'adfjgmsa.jpg'},
+    { pageId: 10, title: 'title - 10.jpg'}, // city
+    { pageId: 11, title: 'title - 11.jpeg'},
+    { pageId: 12, title: 'title - 12.svg'},
+    { pageId: 13, title: 'title - 10.png'}, 
+    { pageId: 14, title: 'title - 11.JPG'},
+    { pageId: 15, title: 'title - 12.SVG'},
   ]
 });
 
@@ -45,3 +52,13 @@ test("selectImagelessPageIds('cities') selects all wikipedia_id in cities that h
   const ids = selectImagelessPageIds(cCity.NAME)(state)
   expect(ids.length).toBe(3)
 })
+
+test('selectImagelessPageTitles() selects all _jpg_ titles from images whose url property is empty', () => {
+  const titles = selectImagelessPageTitles(cSky.NAME)(state);
+  expect(titles.length).toBe(1);
+});
+
+test.only('selectImagelessPageTitles() selects all _jpg_ titles from images whose url property is empty', () => {
+  const titles = selectImagelessPageTitles(cCity.NAME)(state);
+  expect(titles.length).toBe(3);
+});
