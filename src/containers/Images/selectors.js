@@ -4,6 +4,8 @@ import { NAME as SKYSCRAPERS_NAME } from 'containers/Skyscrapers/constants';
 import { selectList as selectCities } from 'containers/Cities/List/selectors';
 import { NAME as CITIES_NAME } from 'containers/Cities/constants';
 
+export const thumbPlaceholder = 'https://placehold.it/200/';
+
 export const selectImages = () => state => state.get('images');
 
 const selectListSelector = (name) => {
@@ -38,4 +40,19 @@ export const selectImagelessPageTitles = (name) => createSelector(
     if (image) titles.push(image.get('title'));
     return titles;
   }, [])
+);
+
+export const selectThumbnailForPage = (pageId) => createSelector(
+  selectImages(),
+  (images) => {
+    const item = images.find(image => {
+      if (image.get('pageId') !== pageId) return false;
+      if (!checkForJpg.test(image.get('title'))) return false;
+      return true;
+    });
+    if (!item) return thumbPlaceholder;
+    const thumb = item.get('thumburl');
+    if (!thumb) return thumbPlaceholder;
+    return thumb;
+  }
 );
