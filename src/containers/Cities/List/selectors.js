@@ -11,7 +11,7 @@ export const selectFilteredList = () => createSelector(
   selectFilterTxt(),
   (list, filterTxt) => {
     if (!filterTxt) return list;
-    const filterRegexp = new RegExp(filterTxt, 'i', 'g');
+    const filterRegexp = new RegExp(filterTxt, 'i');
     return list.filter(item => filterRegexp.test(item.get('title')));
   }
 );
