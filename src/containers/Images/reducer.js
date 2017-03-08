@@ -17,6 +17,14 @@ const reducer = (state = initialState, action) => {
         }, state);
       }, state);
 
+    case c.AJAX_IMG_FETCH_END:
+      return payload.reduce((state, imagePage) => {
+        let i = state.findIndex((it) => it.get('title') === imagePage.title);
+        if (i !== -1 && isArray(imagePage.imageinfo)) {
+          return state.set(i, state.get(i).merge(imagePage.imageinfo[0]));
+        }
+        return state;
+      }, state);
     default:
       return state;
 
