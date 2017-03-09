@@ -1,21 +1,12 @@
 import React from 'react';
-import {
-  Card,
-  Image,
-} from 'semantic-ui-react';
-
-const {
-  Header: CardHeader,
-  Content: CardContent,
-} = Card;
+import { Header, Image } from 'semantic-ui-react';
+import Segment from 'components/Segment';
 
 export const ItemComponent = ({ city }) => (
-  <Card>
+  <Segment>
     <Image fluid src="https://placehold.it/200/" alt={city.get('title')} />
-    <CardContent>
-      <CardHeader>{city.get('title')}</CardHeader>
-    </CardContent>
-  </Card>
+    <Header>{city.get('title')}</Header>
+  </Segment>
 );
 
 export default ItemComponent;

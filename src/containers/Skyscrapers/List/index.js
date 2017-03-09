@@ -1,17 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Card, Loader} from 'semantic-ui-react';
+import { Grid, Loader} from 'semantic-ui-react';
 import { selectList } from './selectors';
 import { selectLoading } from '../selectors';
 import Item from '../Item';
 
+const { Column } = Grid;
+
 export const ListComponent = ({ list, loading }) => {
   return (
-    <Card.Group itemsPerRow={4} style={{ minHeight: '200px' }}>
+    <Grid columns={3}>
       <Loader active={loading}>Loading...</Loader>
-      {!loading && list.map(item => <Item key={item.get('id')} skyscraper={item}/>)}
-    </Card.Group>
+      {!loading && list.map(item => (
+        <Column key={item.get('id')}>
+          <Item skyscraper={item}/>
+        </Column>
+      ))}
+    </Grid>
   )
 };
 

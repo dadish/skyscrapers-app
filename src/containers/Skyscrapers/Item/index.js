@@ -2,14 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectItem as selectCity } from 'containers/Cities/Item/selectors';
 import { selectThumbnailForPage } from 'containers/Images/selectors';
-import { Card, Grid, List } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
+import Segment, { Group } from 'components/Segment';
 import CenteredImage from 'components/CenteredImage';
 import { push } from 'react-router-redux';
-
-const {
-  Header: CardHeader,
-  Content: CardContent,
-} = Card;
 
 const { Column, Row } = Grid;
 
@@ -24,14 +20,14 @@ export const ItemComponent = (props) => {
   const cityTitle = city ? city.get('title') : null;
   
   return (
-    <Card>
-      <CenteredImage src={thumb} alt={skyscraper.get('title')} />
-      <CardContent>
-        <CardHeader>{skyscraper.get('title')}</CardHeader>
+    <Group>
+      <Segment>
+        <CenteredImage src={thumb} alt={skyscraper.get('title')} />
+        <Header>{skyscraper.get('title')}</Header>
         <a href={cityUrl} onClick={goToPage(cityUrl)}> {cityTitle} </a>{', '}
         <a href={yearUrl} onClick={goToPage(yearUrl)}> {year} </a>
-      </CardContent>
-      <CardContent>
+      </Segment>
+      <Segment>
         <Grid columns='equal'>
           <Row>
             <Column>
@@ -47,8 +43,8 @@ export const ItemComponent = (props) => {
             </Column>
           </Row>
         </Grid>  
-      </CardContent>
-    </Card>
+      </Segment>
+    </Group>
   );
 };
 

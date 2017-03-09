@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { reduxForm, Field as ReduxFormField } from 'redux-form/immutable';
 import { Form as SemanticForm } from 'semantic-ui-react';
-import { Segment } from 'semantic-ui-react';
+import Segment from 'components/Segment';
 import InputText from 'components/InputText';
 import InputSelect from 'components/InputSelect';
 import InputDropdown from 'components/InputDropdown';
