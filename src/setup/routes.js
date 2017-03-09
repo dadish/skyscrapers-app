@@ -67,7 +67,7 @@ export default function createRoutes(store) {
               'containers/Cities'
             ], (require) => {
               const renderRoute = loadModule(cb);
-              const name = require('containers/Cities/constants');
+              const name = require('containers/Cities/constants').NAME;
               injectEpic(name, require('containers/Cities/epic').default);
               injectReducer(name, require('containers/Cities/reducer').default);
               renderRoute(require('containers/Cities'));
