@@ -12,7 +12,11 @@ export const HeaderComponent = ({ currentPathname, goTo }) => {
       pointing
       secondary
       size="massive"
-      color="blue"
+      color="black"
+      style={{
+        backgroundColor: '#fff',
+        borderColor: '#fff',
+      }}
     >
       <Item name="home" active={currentPathname === '/'} onClick={goTo('/')}>Home</Item>
       <Item name="cities" active={currentPathname === '/cities'} onClick={goTo('/cities')}>Cities</Item>
