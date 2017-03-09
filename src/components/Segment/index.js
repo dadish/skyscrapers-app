@@ -2,14 +2,14 @@ import React from 'react';
 import { Segment as SemanticSegment } from 'semantic-ui-react';
 import { flatBox } from 'components/styles';
 
-const Segment = ({ children }) => (
-  <SemanticSegment style={flatBox}>
+const Segment = ({ children, style }) => (
+  <SemanticSegment style={{...flatBox, ...style}}>
     {children}
   </SemanticSegment>
 );
 
-export const Group = ({ children }) => (
-  <SemanticSegment.Group style={flatBox}>
+export const Group = ({ children, style }) => (
+  <SemanticSegment.Group style={{...flatBox, ...style}}>
     {children}
   </SemanticSegment.Group>
 );
