@@ -21,9 +21,11 @@ export const ItemComponent = (props) => {
   
   return (
     <Group>
-      <Segment>
+      <Segment style={{ padding: 0}}>
         <CenteredImage src={thumb} alt={skyscraper.get('title')} />
-        <Header>{skyscraper.get('title')}</Header>
+      </Segment>
+      <Segment>
+        <Header as="h3">{skyscraper.get('title')}</Header>
         <a href={cityUrl} onClick={goToPage(cityUrl)}> {cityTitle} </a>{', '}
         <a href={yearUrl} onClick={goToPage(yearUrl)}> {year} </a>
       </Segment>
