@@ -4,7 +4,7 @@ import { NAME as SKYSCRAPERS_NAME } from 'containers/Skyscrapers/constants';
 import { selectList as selectCities } from 'containers/Cities/List/selectors';
 import { NAME as CITIES_NAME } from 'containers/Cities/constants';
 
-export const thumbPlaceholder = '/sky-placeholder-2.png';
+export const thumbPlaceholder = '/sky-placeholder.png';
 
 export const selectImages = () => state => state.get('images');
 
