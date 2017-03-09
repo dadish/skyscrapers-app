@@ -1,2 +1,0 @@
-webpackJsonp([4],{309:function(e,t,n){"use strict";function u(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var r=n(1),l=u(r),d=n(28),a=d.Grid.Column,c=function(e){var t=e.children;return l.default.createElement(d.Grid,{columns:"equal",centered:!0},l.default.createElement(a,{width:12},t))};t.default=c}});
-//# sourceMappingURL=4.32236ea9.chunk.js.map
