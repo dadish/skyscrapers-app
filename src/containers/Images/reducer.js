@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
       return payload.reduce((state, wikipediaPage) => {
         const pageId = wikipediaPage.pageid;
         if (!wikipediaPage.images || !isArray(wikipediaPage.images)) return state;
-        return wikipediaPage.images.reduce((state, { title }) => {
+        return wikipediaPage.images.reverse().reduce((state, { title }) => {
           return state.push(new Map({ pageId, title }));
         }, state);
       }, state);
