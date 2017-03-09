@@ -57,23 +57,6 @@ export default function createRoutes(store) {
       },
       childRoutes: [
         {
-          path: '/cities',
-          name: 'cities',
-          getComponent(nextState, cb) {
-            require.ensure([
-              'containers/Cities/constants',
-              'containers/Cities/reducer',
-              'containers/Cities/epic',
-              'containers/Cities'
-            ], (require) => {
-              const renderRoute = loadModule(cb);
-              const name = require('containers/Cities/constants').NAME;
-              injectEpic(name, require('containers/Cities/epic').default);
-              injectReducer(name, require('containers/Cities/reducer').default);
-              renderRoute(require('containers/Cities'));
-            })
-          },
-        }, {
           path: '/about',
           name: 'about',
           getComponent(nextState, cb) {

@@ -20,7 +20,6 @@ export const HeaderComponent = ({ currentPathname, goTo }) => {
       }}
     >
       <Item name="home" active={currentPathname === '/'} onClick={goTo('/')}>Home</Item>
-      <Item name="cities" active={currentPathname === '/cities'} onClick={goTo('/cities')}>Cities</Item>
       <Item name="about" active={currentPathname === '/about'} onClick={goTo('/about')}>About</Item>
     </Menu>
   );
