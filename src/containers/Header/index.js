@@ -11,6 +11,7 @@ export const HeaderComponent = ({ currentPathname, goTo }) => {
     <Menu
       pointing
       secondary
+      fixed="top"
       size="massive"
       color="black"
       style={{
