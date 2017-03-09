@@ -13,17 +13,6 @@ const {
 
 const { Column, Row } = Grid;
 
-const Architects = ({ list }) => {
-  if (!list.size) return null;
-  return (
-    <Row>
-      <Column>
-          Architected by: {list.map(it => it.get('title')).join(', ')}
-      </Column>
-    </Row>
-  );
-};
-
 export const ItemComponent = (props) => {
   const { skyscraper, city, goToPage, thumb } = props;
   const height = skyscraper.get('height', '');
@@ -52,7 +41,6 @@ export const ItemComponent = (props) => {
               Height: {height} ft.
             </Column>
           </Row>
-          <Architects list={skyscraper.getIn(['architects', 'list'])} />
           <Row>
             <Column>
               <a href={wiki_url} target="_blank" >Read more...</a>
