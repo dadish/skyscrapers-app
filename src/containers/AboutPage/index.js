@@ -4,6 +4,10 @@ import { Container } from 'semantic-ui-react';
 const About = () => (
   <Container
     text
+    style={{
+      padding: '2rem 1rem',
+      backgroundColor: '#fff',
+    }}
   >
     <h1>About Skyscrapers</h1>
     <p>
