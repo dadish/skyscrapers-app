@@ -4,7 +4,8 @@ import { shallow } from 'enzyme';
 import { ItemComponent } from '../';
 
 const props = {
-  skyscraper: fromJS({})
+  skyscraper: fromJS({}),
+  goToPage: () => {},
 };
 
 test('renders without crashing', () => {
