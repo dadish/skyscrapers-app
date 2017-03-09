@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import "./style.css";
 
-const CenteredImage = ({ width, height, alt, src, ...rest }) => (
+const CenteredImage = ({ src }) => (
   <div
     className="ctrd-img"
     style={{
@@ -11,8 +11,7 @@ const CenteredImage = ({ width, height, alt, src, ...rest }) => (
 );
 
 CenteredImage.propTypes = {
-  src: PropTypes.string,
-  alt: PropTypes.string,
+  src: PropTypes.string.isRequired,
 };
 
 export default CenteredImage;
