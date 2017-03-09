@@ -1,0 +1,11 @@
+.ctrd-img{
+  float: left;
+  width: 100%;
+  background-size: cover !important;
+}
+
+.ctrd-img:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
