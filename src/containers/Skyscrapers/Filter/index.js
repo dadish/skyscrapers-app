@@ -17,7 +17,7 @@ import {
 const { Field: SemanticField, Group: SemanticGroup } = SemanticForm;
 
 export const FilterComponent = ({ heightOptions, yearOptions, floorsOptions, cityOptions }) => (
-  <Segment>
+  <Segment raise="2">
     <SemanticForm>
       <SemanticGroup widths='equal'>
         <SemanticField>

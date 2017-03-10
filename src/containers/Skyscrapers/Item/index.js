@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectItem as selectCity } from 'containers/Cities/Item/selectors';
 import { selectThumbnailForPage } from 'containers/Images/selectors';
-import { Grid, Header } from 'semantic-ui-react';
+import { Header, Icon, Label } from 'semantic-ui-react';
 import Segment, { Group } from 'components/Segment';
 import CenteredImage from 'components/CenteredImage';
 import { push } from 'react-router-redux';
 
-const { Column, Row } = Grid;
+const { Detail: LDetail, Group: LGroup } = Label;
 
 export const ItemComponent = (props) => {
   const { skyscraper, city, goToPage, thumb } = props;
@@ -20,31 +20,31 @@ export const ItemComponent = (props) => {
   const cityTitle = city ? city.get('title') : null;
   
   return (
-    <Group>
+    <Group raise="2">
       <Segment style={{ padding: 0}}>
         <CenteredImage src={thumb} alt={skyscraper.get('title')} />
       </Segment>
       <Segment>
         <Header as="h3">{skyscraper.get('title')}</Header>
-        <a href={cityUrl} onClick={goToPage(cityUrl)}> {cityTitle} </a>{', '}
-        <a href={yearUrl} onClick={goToPage(yearUrl)}> {year} </a>
       </Segment>
       <Segment>
-        <Grid columns='equal'>
-          <Row>
-            <Column>
-              Floors: {floors}          
-            </Column>
-            <Column>
-              Height: {height} ft.
-            </Column>
-          </Row>
-          <Row>
-            <Column>
-              <a href={wiki_url} target="_blank" >Read more...</a>
-            </Column>
-          </Row>
-        </Grid>  
+        <LGroup>
+          <Label>
+          <Icon name="location arrow" /> {cityTitle}
+          </Label>
+          <Label>
+            Year <LDetail>{year}</LDetail>
+          </Label>
+          <Label>
+            Floors <LDetail>{floors}</LDetail>
+          </Label>
+          <Label>
+            Height <LDetail>{height} ft.</LDetail>
+          </Label>
+        </LGroup>
+      </Segment>
+      <Segment>
+        <a href={wiki_url} target="_blank" ><Icon name="external"/>Wikipedia</a>
       </Segment>
     </Group>
   );

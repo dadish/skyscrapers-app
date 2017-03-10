@@ -1,18 +1,36 @@
 import React from 'react';
 import { Segment as SemanticSegment } from 'semantic-ui-react';
-import { flatBox } from 'components/styles';
+import * as s from 'components/styles';
 
-const Segment = ({ children, style }) => (
-  <SemanticSegment style={{...flatBox, ...style}}>
-    {children}
-  </SemanticSegment>
-);
+const Segment = ({ children, style, raise }) => {
+  raise = raise || 0;
+  return (
+    <SemanticSegment
+      style={{
+        ...s.flatBox,
+        ...s[`elevation${raise}`],
+        ...style,
+      }}
+    >
+      {children}
+    </SemanticSegment>
+  );
+};
 
-export const Group = ({ children, style }) => (
-  <SemanticSegment.Group style={{...flatBox, ...style}}>
-    {children}
-  </SemanticSegment.Group>
-);
+export const Group = ({ children, style, raise }) => {
+  raise = raise || 0;
+  return (
+    <SemanticSegment.Group
+      style={{
+        ...s.flatBox,
+        ...s[`elevation${raise}`],
+        ...style,
+      }}
+    >
+      {children}
+    </SemanticSegment.Group>
+  )
+};
 
 Segment.Group = Group;
 

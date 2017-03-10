@@ -3,6 +3,7 @@ import Segment from 'components/Segment';
 
 const About = () => (
   <Segment
+    raise="2"
     style={{
       maxWidth: '700px',
       margin: 'auto',
