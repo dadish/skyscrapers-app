@@ -20,40 +20,29 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         require.ensure([
-          'containers/HomePage',
           'containers/Images/constants',
           'containers/Images/reducer',
           'containers/Images/epic',
+          'containers/Skyscrapers/constants',
+          'containers/Skyscrapers/reducer',
+          'containers/Skyscrapers/epic',
+          'containers/Cities/constants',
+          'containers/Cities/reducer',
+          'containers/Cities/epic',
+          'containers/Skyscrapers'
         ], (require) => {
           const renderRoute = loadModule(cb);
           const name = require('containers/Images/constants').NAME;
-          renderRoute(require('containers/HomePage'));
           injectEpic(name, require('containers/Images/epic').default);
           injectReducer(name, require('containers/Images/reducer').default);
+          const skyName = require('containers/Skyscrapers/constants').NAME;
+          const cityName = require('containers/Cities/constants').NAME;
+          injectEpic(skyName, require('containers/Skyscrapers/epic').default);
+          injectReducer(skyName, require('containers/Skyscrapers/reducer').default);
+          injectEpic(cityName, require('containers/Cities/epic').default);
+          injectReducer(cityName, require('containers/Cities/reducer').default);
+          renderRoute(require('containers/Skyscrapers'));
         })
-      },
-      indexRoute: {
-        name: 'skyscrapers',
-        getComponent(nextState, cb) {
-          require.ensure([
-            'containers/Skyscrapers/constants',
-            'containers/Skyscrapers/reducer',
-            'containers/Skyscrapers/epic',
-            'containers/Cities/constants',
-            'containers/Cities/reducer',
-            'containers/Cities/epic',
-            'containers/Skyscrapers'
-          ], (require) => {
-            const renderRoute = loadModule(cb);
-            const skyName = require('containers/Skyscrapers/constants').NAME;
-            const cityName = require('containers/Cities/constants').NAME;
-            injectEpic(skyName, require('containers/Skyscrapers/epic').default);
-            injectReducer(skyName, require('containers/Skyscrapers/reducer').default);
-            injectEpic(cityName, require('containers/Cities/epic').default);
-            injectReducer(cityName, require('containers/Cities/reducer').default);
-            renderRoute(require('containers/Skyscrapers'));
-          })
-        },
       },
       childRoutes: [
         {
