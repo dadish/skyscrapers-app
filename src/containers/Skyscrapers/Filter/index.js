@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { reduxForm, Field as ReduxFormField } from 'redux-form/immutable';
-import { Form as SemanticForm } from 'semantic-ui-react';
+import { Form as SemanticForm} from 'semantic-ui-react';
 import Segment from 'components/Segment';
 import InputText from 'components/InputText';
 import InputSelect from 'components/InputSelect';
@@ -13,11 +13,12 @@ import {
   selectYearOptions,
   selectCityOptions,
 } from './selectors';
+import { selectLoading } from '../selectors';
 
 const { Field: SemanticField, Group: SemanticGroup } = SemanticForm;
 
-export const FilterComponent = ({ heightOptions, yearOptions, floorsOptions, cityOptions }) => (
-  <Segment raise="2">
+export const FilterComponent = ({ heightOptions, yearOptions, floorsOptions, cityOptions, loading }) => (
+  <Segment raise="2" loading={loading}>
     <SemanticForm>
       <SemanticGroup widths='equal'>
         <SemanticField>
@@ -78,6 +79,7 @@ const mapStateToProps = createStructuredSelector({
   floorsOptions: selectFloorsOptions(),
   yearOptions: selectYearOptions(),
   cityOptions: selectCityOptions(),
+  loading: selectLoading(),
 });
 
 export default reduxForm({
