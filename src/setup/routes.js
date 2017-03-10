@@ -43,22 +43,19 @@ export default function createRoutes(store) {
           injectReducer(cityName, require('containers/Cities/reducer').default);
           renderRoute(require('containers/Skyscrapers'));
         })
+      }
+    }, {
+      path: '/about',
+      name: 'about',
+      getComponent(nextState, cb) {
+        require.ensure([
+          'containers/AboutPage'
+        ], (require) => {
+          const renderRoute = loadModule(cb);
+          const component = require('containers/AboutPage');
+          renderRoute(component);
+        })
       },
-      childRoutes: [
-        {
-          path: '/about',
-          name: 'about',
-          getComponent(nextState, cb) {
-            require.ensure([
-              'containers/AboutPage'
-            ], (require) => {
-              const renderRoute = loadModule(cb);
-              const component = require('containers/AboutPage');
-              renderRoute(component);
-            })
-          },
-        }
-      ]
     }, {
       path: '*',
       name: 'notFound',

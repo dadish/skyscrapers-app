@@ -6,7 +6,7 @@ const About = () => (
     raise="2"
     style={{
       maxWidth: '700px',
-      margin: 'auto',
+      margin: '2rem auto',
       padding: '2rem 1rem',
       backgroundColor: '#fff',
     }}
