@@ -13,7 +13,6 @@ export const HeaderComponent = ({ currentPathname, goTo }) => {
       pointing
       secondary
       fixed="top"
-      size="massive"
       color="black"
       style={{
         backgroundColor: '#fff',

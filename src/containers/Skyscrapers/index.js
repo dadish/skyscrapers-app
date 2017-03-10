@@ -1,13 +1,22 @@
 import React from 'react';
 import List from './List';
 import Filter from './Filter';
-import { Divider } from 'semantic-ui-react';
+import Map from './Map';
+import { Grid } from 'semantic-ui-react';
+
+const { Column } = Grid;
 
 const SkyscrapersComponent = () => (
-  <div>
+  <div
+    style={{
+      padding: '1rem',
+      paddingRight: '50%',
+      paddingTop: '1rem',
+    }}
+  >
     <Filter />
-    <Divider hidden />
     <List />
+    <Map />
   </div>
 );
 

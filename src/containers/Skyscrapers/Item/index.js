@@ -41,7 +41,7 @@ export const ItemComponent = (props) => {
         <CenteredImage src={thumb} alt={skyscraper.get('title')} />
       </Segment>
       <Segment>
-        <Header as="h3">{skyscraper.get('title')}</Header>
+        <Header as="h4">{skyscraper.get('title')}</Header>
       </Segment>
       <Segment>
         <LGroup>
