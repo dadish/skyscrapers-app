@@ -5,7 +5,7 @@ import "./style.css";
 
 const defaultCenter = {
   lat: 36.2115201,
-  lng: -98.8806406,
+  lng: -96.9470468,
 };
 
 export const SkyMap = () => (
