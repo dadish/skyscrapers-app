@@ -7,20 +7,20 @@ import { selectLocation, selectLocationPathname } from 'containers/App/selectors
 
 export const selectHeightOptions = () => () => [
   { key: 'any', text: 'Any', value: "" },
-  { key: '0-250', text: '0-250 ft.', value: '0-250' },
-  { key: '250-500', text: '250-500 ft.', value: '250-500' },
-  { key: '500-750', text: '500-750 ft.', value: '500-750' },
-  { key: '750-1000', text: '750-1000 ft.', value: '750-1000' },
-  { key: '1000+', text: '1000+ ft.', value: '1000-' },
+  { key: '0-250', text: '0-250 ft.', value: '0-250', min: 0, max: 250 },
+  { key: '250-500', text: '250-500 ft.', value: '250-500', min: 250, max: 500 },
+  { key: '500-750', text: '500-750 ft.', value: '500-750', min: 500, max: 750 },
+  { key: '750-1000', text: '750-1000 ft.', value: '750-1000', min: 750, max: 1000 },
+  { key: '1000+', text: '1000+ ft.', value: '1000-', min: 1000 },
 ];
 
 export const selectFloorsOptions = () => () => [
   { key: 'any', text: 'Any', value: "" },
-  { key: '0-20', text: '0-20 floors', value: '0-20' },
-  { key: '20-40', text: '20-40 floors', value: '20-40' },
-  { key: '40-60', text: '40-60 floors', value: '40-60' },
-  { key: '60-80', text: '60-80 floors', value: '60-80' },
-  { key: '80+', text: '80+ floors', value: '80-' },
+  { key: '0-20', text: '0-20 floors', value: '0-20', min: 0, max: 20 },
+  { key: '20-40', text: '20-40 floors', value: '20-40', min: 20, max: 40 },
+  { key: '40-60', text: '40-60 floors', value: '40-60', min: 40, max: 60 },
+  { key: '60-80', text: '60-80 floors', value: '60-80', min: 60, max: 80 },
+  { key: '80+', text: '80+ floors', value: '80-', min: 80 },
 ];
 
 export const selectYearOptions = () => () => {
