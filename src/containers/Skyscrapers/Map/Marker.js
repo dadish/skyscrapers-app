@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Popup } from 'semantic-ui-react';
 import SkyItem from '../Item';
 
@@ -20,23 +20,25 @@ const active_style = {
   top: - MARKER_HEIGHT_ACTIVE,
 };
 
-const Marker = ({ skyscraper }) => {
-  const active = skyscraper.get('active');
-  return (
-    <Popup 
-      trigger={
-        <div className="map-marker-w">
-          <div
-            className={active ? `map-marker active` : "map-marker"}
-            style={active ? active_style : style}
-          />
-        </div>
-      }
-      content={<SkyItem skyscraper={skyscraper} popup />}
-      on="click"
-    />
-
-  );
-};
+class Marker extends PureComponent {
+  render () {
+    const { skyscraper } = this.props;
+    const active = skyscraper.get('active');
+    return (
+      <Popup 
+        trigger={
+          <div className="map-marker-w">
+            <div
+              className={active ? `map-marker active` : "map-marker"}
+              style={active ? active_style : style}
+            />
+          </div>
+        }
+        content={<SkyItem skyscraper={skyscraper} popup />}
+        on="click"
+      />
+    );
+  }
+}
 
 export default Marker;
