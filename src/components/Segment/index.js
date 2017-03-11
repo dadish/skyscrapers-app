@@ -2,7 +2,7 @@ import React from 'react';
 import { Segment as SemanticSegment } from 'semantic-ui-react';
 import * as s from 'components/styles';
 
-const Segment = ({ children, style, raise, loading }) => {
+const Segment = ({ children, style, raise, ...rest }) => {
   raise = raise || 0;
   return (
     <SemanticSegment
@@ -11,14 +11,14 @@ const Segment = ({ children, style, raise, loading }) => {
         ...s[`elevation${raise}`],
         ...style,
       }}
-      loading={loading}
+      {...rest}
     >
       {children}
     </SemanticSegment>
   );
 };
 
-export const Group = ({ children, style, raise }) => {
+export const Group = ({ children, style, raise, ...rest }) => {
   raise = raise || 0;
   return (
     <SemanticSegment.Group
@@ -27,6 +27,7 @@ export const Group = ({ children, style, raise }) => {
         ...s[`elevation${raise}`],
         ...style,
       }}
+      {...rest}
     >
       {children}
     </SemanticSegment.Group>
