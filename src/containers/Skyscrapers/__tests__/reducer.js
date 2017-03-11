@@ -1,11 +1,7 @@
 import reducer, { initialState } from '../reducer';
 import listReducer from '../List/reducer';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import {
-  ajaxFetchStart,
-  ajaxFetchEnd,
-  ajaxFetchFail,
-} from '../actions';
+import * as a from '../actions';
 
 jest.mock('../List/reducer', () => jest.fn());
 
@@ -15,19 +11,19 @@ test('returns the given state untouched if action type is unknown', () => {
 
 test('sets the `loading` property to `true` on AJAX_FETCH_START action', () => {
   expect(initialState.get('loading')).toBe(false);
-  expect(reducer(initialState, ajaxFetchStart()).get('loading')).toBe(true);
+  expect(reducer(initialState, a.ajaxFetchStart()).get('loading')).toBe(true);
 });
 
 test('sets the `loading` property to `false` on AJAX_FETCH_END action', () => {
   const state = initialState.set('loading', true);
   expect(state.get('loading')).toBe(true);
-  expect(reducer(state, ajaxFetchEnd()).get('loading')).toBe(false);
+  expect(reducer(state, a.ajaxFetchEnd()).get('loading')).toBe(false);
 });
 
 test('sets the `loading` property to `false` on AJAX_FETCH_FAIL action', () => {
   const state = initialState.set('loading', true);
   expect(state.get('loading')).toBe(true);
-  expect(reducer(state, ajaxFetchFail()).get('loading')).toBe(false);
+  expect(reducer(state, a.ajaxFetchFail()).get('loading')).toBe(false);
 });
 
 test('updates the keyword according to browser URL query on LOCATION_CHANGE action with POP location action type', () => {
@@ -69,7 +65,23 @@ test('sets keyword to empty strin on LOCATION_CHANGE action if there is not keyw
 test('delegates the AJAX_FETCH_END action to ./List/reducer', () => {
   const lastCallIndex = listReducer.mock.calls.length;
   const payload = [];
-  reducer(initialState, ajaxFetchEnd(payload));
+  reducer(initialState, a.ajaxFetchEnd(payload));
+  expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
+  expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
+});
+
+test('delegates the ACTIVATE_ITEM action to ./List/reducer', () => {
+  const lastCallIndex = listReducer.mock.calls.length;
+  const payload = "some lafowrplea";
+  reducer(initialState, a.activateItem(payload));
+  expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
+  expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
+});
+
+test('delegates the DEACTIVATE_ITEM action to ./List/reducer', () => {
+  const lastCallIndex = listReducer.mock.calls.length;
+  const payload = "s32435947twrplea";
+  reducer(initialState, a.deactivateItem(payload));
   expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
   expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
 });

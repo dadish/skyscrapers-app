@@ -16,6 +16,7 @@ const initialItemState = fromJS({
   architects: {
     list: [],
   },
+  active: false,
 })
 
 const itemReducer = (state = initialItemState, action) => {
@@ -24,6 +25,12 @@ const itemReducer = (state = initialItemState, action) => {
 
     case c.AJAX_FETCH_END:
       return state.merge(payload);
+
+    case c.ACTIVATE_ITEM:
+      return state.set('active', true);
+
+    case c.DEACTIVATE_ITEM:
+      return state.set('active', false);
 
     default:
       return state;

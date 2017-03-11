@@ -8,6 +8,7 @@ import {
   getHeightFilterValue,
   getHeightPopupStr,
 } from './selectors';
+import * as a from '../actions';
 import { Header, Icon, Label, Popup } from 'semantic-ui-react';
 import Segment, { Group } from 'components/Segment';
 import CenteredImage from 'components/CenteredImage';
@@ -16,8 +17,17 @@ import { push } from 'react-router-redux';
 const { Detail: LDetail, Group: LGroup } = Label;
 
 export const ItemComponent = (props) => {
-  const { skyscraper, city, goToPage, thumb } = props;
+  const {
+    skyscraper,
+    city,
+    goToPage,
+    thumb,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = props;
   
+  const id = skyscraper.get('id');
+
   const height = skyscraper.get('height', '');
   const heightUrl = `/?height=${getHeightFilterValue(height)}`;
   const heightPopup = getHeightPopupStr(height);
@@ -34,9 +44,12 @@ export const ItemComponent = (props) => {
   const cityTitle = city ? city.get('title') : null;
   
   const wiki_url = `https://en.wikipedia.org/wiki/index.html?curid=${skyscraper.get('wikipedia_id')}`;
-
   return (
-    <Group raise="2">
+    <Group
+      raise={ skyscraper.get('active') ? 8 : 2}
+      onMouseEnter={handleMouseEnter(id)}
+      onMouseLeave={handleMouseLeave(id)}
+    >
       <Segment style={{ padding: 0}}>
         <CenteredImage src={thumb} alt={skyscraper.get('title')} />
       </Segment>
@@ -89,6 +102,8 @@ const mapDispatchToProps = dispatch => ({
     ev.preventDefault();
     dispatch(push(url));
   },
+  handleMouseEnter: (id) => () => dispatch(a.activateItem(id)),
+  handleMouseLeave: (id) => () => dispatch(a.deactivateItem(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemComponent);

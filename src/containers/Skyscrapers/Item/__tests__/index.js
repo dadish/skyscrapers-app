@@ -6,6 +6,8 @@ import { ItemComponent } from '../';
 const props = {
   skyscraper: fromJS({}),
   goToPage: () => {},
+  handleMouseEnter: () => {},
+  handleMouseLeave: () => {},
 };
 
 test('renders without crashing', () => {
