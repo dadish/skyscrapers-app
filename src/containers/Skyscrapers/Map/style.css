@@ -13,6 +13,7 @@
 }
 
 .map-marker{
+  transition: all 80ms ease-in-out;
   position: absolute;
   background-image: url('/sky-marker.svg');
   background-repeat: no-repeat;

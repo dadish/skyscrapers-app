@@ -1,11 +1,13 @@
 import React from 'react';
 import { Segment as SemanticSegment } from 'semantic-ui-react';
 import * as s from 'components/styles';
+import "./style.css";
 
 const Segment = ({ children, style, raise, ...rest }) => {
   raise = raise || 0;
   return (
     <SemanticSegment
+      className="sgmnt"
       style={{
         ...s.flatBox,
         ...s[`elevation${raise}`],
@@ -22,6 +24,7 @@ export const Group = ({ children, style, raise, ...rest }) => {
   raise = raise || 0;
   return (
     <SemanticSegment.Group
+      className="sgmnt"
       style={{
         ...s.flatBox,
         ...s[`elevation${raise}`],
