@@ -53,7 +53,7 @@ export const selectFilterValues = () =>
 
 const buildFilterSelector =   ({ keyword, cities, height, floors, year }) => {
     
-  let selector = "";
+  let selector = ", sort=random";
 
   // keyword {string} --> 'foo' || ''
   if (keyword) selector += `, title|body%=${keyword}`;
