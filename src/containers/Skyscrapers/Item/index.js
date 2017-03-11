@@ -24,6 +24,7 @@ export const ItemComponent = (props) => {
     thumb,
     handleMouseEnter,
     handleMouseLeave,
+    popup,
   } = props;
   
   const id = skyscraper.get('id');
@@ -44,9 +45,13 @@ export const ItemComponent = (props) => {
   const cityTitle = city ? city.get('title') : null;
   
   const wiki_url = `https://en.wikipedia.org/wiki/index.html?curid=${skyscraper.get('wikipedia_id')}`;
+
+  let elevation = skyscraper.get('active') ? 8 : 2
+  if (popup) elevation = false;
+  
   return (
     <Group
-      raise={ skyscraper.get('active') ? 8 : 2}
+      raise={elevation}
       onMouseEnter={handleMouseEnter(id)}
       onMouseLeave={handleMouseLeave(id)}
     >

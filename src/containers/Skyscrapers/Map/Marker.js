@@ -1,4 +1,6 @@
 import React from 'react';
+import { Popup } from 'semantic-ui-react';
+import SkyItem from '../Item';
 
 const MARKER_WIDTH = 30;
 const MARKER_HEIGHT = 50;
@@ -21,12 +23,19 @@ const active_style = {
 const Marker = ({ skyscraper }) => {
   const active = skyscraper.get('active');
   return (
-    <div className="map-marker-w">
-      <div
-        className={active ? `map-marker active` : "map-marker"}
-        style={active ? active_style : style}
-      />
-    </div>
+    <Popup 
+      trigger={
+        <div className="map-marker-w">
+          <div
+            className={active ? `map-marker active` : "map-marker"}
+            style={active ? active_style : style}
+          />
+        </div>
+      }
+      content={<SkyItem skyscraper={skyscraper} popup />}
+      on="click"
+    />
+
   );
 };
 
