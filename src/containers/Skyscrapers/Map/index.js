@@ -34,6 +34,9 @@ export const SkyMap = (props) => {
         }}
       >
         <GoogleMap
+          options={() => ({
+            scrollwheel: false
+          })}
           defaultCenter={defaultCenter}
           defaultZoom={4}
           bootstrapURLKeys={{
