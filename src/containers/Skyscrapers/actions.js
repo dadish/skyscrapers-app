@@ -20,3 +20,13 @@ export const ajaxFetchFail = createActionCreator(c.AJAX_FETCH_FAIL);
  * The user visited the page the first time 
  */
 export const initialLoad = createActionCreator(c.INITIAL_LOAD);
+
+/**
+ * The user enters over skyscraper card or map-marker
+ */
+export const activateItem = createActionCreator(c.ACTIVATE_ITEM);
+
+/**
+ * The user leaves over skyscraper card or map-marker
+ */
+export const deactivateItem = createActionCreator(c.DEACTIVATE_ITEM);

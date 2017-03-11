@@ -18,6 +18,14 @@ const actionsMap = {
     method: a.initialLoad,
     type: c.INITIAL_LOAD
   },
+  activateItem: {
+    method: a.activateItem,
+    type: c.ACTIVATE_ITEM
+  },
+  deactivateItem: {
+    method: a.deactivateItem,
+    type: c.DEACTIVATE_ITEM
+  },
 };
 
 Object.keys(actionsMap).forEach((methodName) => {

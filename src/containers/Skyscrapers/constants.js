@@ -31,3 +31,13 @@ export const AJAX_FETCH_FAIL = 'skyscrapers/Skyscrapers/AJAX_FETCH_FAIL';
  * The user visited the page the first time 
  */
 export const INITIAL_LOAD = 'skyscrapers/Skyscrapers/INITIAL_LOAD';
+
+/**
+ * The user enters over skyscraper card or map-marker
+ */
+export const ACTIVATE_ITEM = 'skyscrapers/Skyscrapers/ACTIVATE_ITEM';
+
+/**
+ * The user leaves over skyscraper card or map-marker
+ */
+export const DEACTIVATE_ITEM = 'skyscrapers/Skyscrapers/DEACTIVATE_ITEM';
