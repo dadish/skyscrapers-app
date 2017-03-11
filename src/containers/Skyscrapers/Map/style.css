@@ -1,5 +1,29 @@
-.skymap{
+.map-w{
   position: fixed;
-  top: 3rem;
+  top: 0;
   bottom: 0;
+  right: 0;
+  left: 50%;
+}
+
+.map-marker-w{
+  position:relative;
+  width: 0px;
+  height: 0px;
+}
+
+.map-marker{
+  position: absolute;
+  background-image: url('/sky-marker.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.map-marker:hover, .map-marker.active {
+  background-image: url('/sky-marker-blue.svg');
+  z-index: 100000;
+}
+
+.map-marker:hover {
+  cursor: pointer;
 }
