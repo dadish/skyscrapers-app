@@ -26,11 +26,13 @@ const reducer = (state = initialState, action) => {
       return state.set('loading', true);
 
     case c.AJAX_FETCH_END:
-      state = state.set('loading', false);
-      return state.set('list', listReducer(state.get('list'), action));
+      return state
+        .set('loading', false)
+        .set('list', listReducer(state.get('list'), action));
 
     case c.ACTIVATE_ITEM:
     case c.DEACTIVATE_ITEM:
+    case c.RESET_LIST:
       return state.set('list', listReducer(state.get('list'), action));
 
     case c.AJAX_FETCH_FAIL:

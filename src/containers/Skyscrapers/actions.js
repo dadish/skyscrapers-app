@@ -2,6 +2,11 @@ import createActionCreator from 'utils/createActionCreator';
 import * as c from './constants';
 
 /**
+ * When the list need to be reset before appending new filtered list
+ */
+export const resetList  = createActionCreator(c.RESET_LIST);
+
+/**
  * The AJAX filter request for matching skyscrapers starts
  */
 export const ajaxFetchStart = createActionCreator(c.AJAX_FETCH_START);

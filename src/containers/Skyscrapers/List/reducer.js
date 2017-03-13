@@ -9,8 +9,13 @@ const reducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
 
+    case c.RESET_LIST:
+      return new List();
+
     case c.AJAX_FETCH_END:
-      return new List(payload.data.skyscraper.list.map(item => itemReducer(undefined, a.ajaxFetchEnd(item))));
+      return payload.data.skyscraper.list.reduce((state, item) => {
+        return state.push(itemReducer(undefined, a.ajaxFetchEnd(item)))
+      }, state);
 
     case c.ACTIVATE_ITEM:
     case c.DEACTIVATE_ITEM:

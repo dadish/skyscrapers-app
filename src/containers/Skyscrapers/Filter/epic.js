@@ -10,6 +10,7 @@ import {
 } from 'containers/App/selectors';
 import { selectFilterSelector, selectFilterUrl } from './selectors';
 import listEpic from '../List/epic';
+import { resetList } from '../actions';
 
 const { CHANGE } = actionTypes;
 
@@ -47,6 +48,7 @@ const epic = (action$, store) =>
       // then after we renew the skyscrapers list, we also udpate the
       // url to support filtering with url
       return concat$(
+        of$(resetList()),
         listEpic(selector),
         of$(push(filterStr)),
       );

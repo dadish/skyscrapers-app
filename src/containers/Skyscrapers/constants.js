@@ -8,9 +8,9 @@
 export const NAME = 'skyscrapers';
 
 /**
- * When the user updates the filter text
+ * When the list need to be reset before appending new filtered list
  */
-export const UPDATE_FILTER_KEYWORD = 'skyscrapers/Skyscrapers/UPDATE_FILTER_KEYWORD';
+export const RESET_LIST = 'skyscrapers/Skyscrapers/RESET_LIST';
 
 /**
  * The AJAX filter request for matching skyscrapers starts
