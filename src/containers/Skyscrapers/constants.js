@@ -41,3 +41,8 @@ export const ACTIVATE_ITEM = 'skyscrapers/Skyscrapers/ACTIVATE_ITEM';
  * The user leaves over skyscraper card or map-marker
  */
 export const DEACTIVATE_ITEM = 'skyscrapers/Skyscrapers/DEACTIVATE_ITEM';
+
+/**
+ * When the user scrolls down near to end
+ */
+export const HIT_BOTTOM = 'skyscrapers/Skyscrapers/HIT_BOTTOM';

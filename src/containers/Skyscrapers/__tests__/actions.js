@@ -26,6 +26,10 @@ const actionsMap = {
     method: a.deactivateItem,
     type: c.DEACTIVATE_ITEM
   },
+  hitBottom: {
+    method: a.hitBottom,
+    type: c.HIT_BOTTOM
+  },
 };
 
 Object.keys(actionsMap).forEach((methodName) => {

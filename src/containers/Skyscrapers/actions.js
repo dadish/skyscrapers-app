@@ -35,3 +35,8 @@ export const activateItem = createActionCreator(c.ACTIVATE_ITEM);
  * The user leaves over skyscraper card or map-marker
  */
 export const deactivateItem = createActionCreator(c.DEACTIVATE_ITEM);
+
+/**
+ * When the user scrolls down near to end
+ */
+export const hitBottom = createActionCreator(c.HIT_BOTTOM);

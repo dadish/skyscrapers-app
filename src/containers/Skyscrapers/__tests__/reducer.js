@@ -15,9 +15,19 @@ test('sets the `loading` property to `true` on AJAX_FETCH_START action', () => {
 });
 
 test('sets the `loading` property to `false` on AJAX_FETCH_END action', () => {
+  const payload = {
+    data: {
+      skyscraper: {
+        listTotal: 0,
+        listLimit: 30,
+        listStart: 0,
+        list: []
+      }
+    }
+  };
   const state = initialState.set('loading', true);
   expect(state.get('loading')).toBe(true);
-  expect(reducer(state, a.ajaxFetchEnd()).get('loading')).toBe(false);
+  expect(reducer(state, a.ajaxFetchEnd(payload)).get('loading')).toBe(false);
 });
 
 test('sets the `loading` property to `false` on AJAX_FETCH_FAIL action', () => {
@@ -64,7 +74,16 @@ test('sets keyword to empty strin on LOCATION_CHANGE action if there is not keyw
 
 test('delegates the AJAX_FETCH_END action to ./List/reducer', () => {
   const lastCallIndex = listReducer.mock.calls.length;
-  const payload = [];
+  const payload = {
+    data: {
+      skyscraper: {
+        listTotal: 0,
+        listLimit: 30,
+        listStart: 0,
+        list: []
+      }
+    }
+  };
   reducer(initialState, a.ajaxFetchEnd(payload));
   expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
   expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
