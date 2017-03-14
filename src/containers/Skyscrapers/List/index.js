@@ -17,7 +17,7 @@ export const ListComponent = ({ list, loading }) => {
           <Item skyscraper={item}/>
         </Column>
       )) : null}
-      <Column width={16}>
+      {loading && <Column width={16}>
         <Segment
           style={{
             backgroundColor: '#000',
@@ -26,9 +26,9 @@ export const ListComponent = ({ list, loading }) => {
             padding: '2rem',
           }}
         >
-          <Loader active={loading} inline="centered" inverted>{loadingStr}</Loader>
+          <Loader active inline="centered" inverted>{loadingStr}</Loader>
         </Segment>
-      </Column>
+      </Column>}
     </Grid>
   )
 };
