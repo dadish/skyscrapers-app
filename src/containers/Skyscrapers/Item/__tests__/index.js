@@ -5,6 +5,7 @@ import { ItemComponent } from '../';
 
 const props = {
   skyscraper: fromJS({}),
+  thumb: 'string',
   goToPage: () => {},
   handleMouseEnter: () => {},
   handleMouseLeave: () => {},
