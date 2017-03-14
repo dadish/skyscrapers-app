@@ -41,7 +41,10 @@ const epic = (action$, store) =>
       // only renew the skyscrapers list if filter and url have the
       // same state
       if (`${pathname}${searchStr}` === filterStr) {
-        return listEpic(selector);
+        return concat$(
+          of$(resetList()),
+          listEpic(selector),
+        );
       }
 
       // if filterForm data and url search query have different state
