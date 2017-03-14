@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Popup } from 'semantic-ui-react';
+import { selectPopupOpen } from '../selectors';
+import * as a from '../actions';
 import SkyItem from '../Item';
 
 const MARKER_WIDTH = 30;
@@ -22,10 +25,13 @@ const active_style = {
 
 class Marker extends PureComponent {
   render () {
-    const { skyscraper } = this.props;
+    const { skyscraper, handlePopupClose, handlePopupOpen, popupOpen } = this.props;
     const active = skyscraper.get('active');
     return (
-      <Popup 
+      <Popup
+        open={popupOpen}
+        onClose={handlePopupClose}
+        onOpen={handlePopupOpen}
         trigger={
           <div className="map-marker-w">
             <div
@@ -41,4 +47,13 @@ class Marker extends PureComponent {
   }
 }
 
-export default Marker;
+const mapStateToProps = () => (state, { skyscraper, inPopup }) => ({
+  popupOpen: selectPopupOpen(`marker_${skyscraper.get('id')}`)(state),
+});
+
+const mapDispatchToProps = (dispatch, { skyscraper }) => ({
+  handlePopupOpen: () => dispatch(a.showPopup(`marker_${skyscraper.get('id')}`)),
+  handlePopupClose: () => dispatch(a.hidePopup(`marker_${skyscraper.get('id')}`)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Marker);
