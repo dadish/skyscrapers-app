@@ -25,6 +25,9 @@ import query from '../schema';
 const listEpic = (selector = "") =>
   concat$(
 
+    // close all popups if there are any
+    of$(a.hideAllPopups()),
+
     // For each ajax request we fire AJAC_FILTER_START action
     of$(a.ajaxFetchStart()),
 
@@ -38,13 +41,15 @@ const listEpic = (selector = "") =>
       method: 'POST',
     })
 
-      // fire AJAX_FETCH_END action when successfully requested
+      // on successful request...
       .mergeMap((xhr) => concat$(
+        // dispatch AJAX_FETCH_END action
         of$(a.ajaxFetchEnd(xhr.response)),
+        // dispatch AJAX_GET_IMAGES on th requested list
         of$(ajaxGetImages(c.NAME)),
         ))
 
-      // fire AJAC_FILTER_FAIL action if request is note successful
+      // fire AJAC_FILTER_FAIL action if request is not successful
       .catch(e => of$(a.ajaxFetchFail(e)))
   );
 
