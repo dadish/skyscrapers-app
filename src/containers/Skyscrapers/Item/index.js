@@ -1,25 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectItem as selectCity } from 'containers/Cities/Item/selectors';
 import { selectThumbnailForPage } from 'containers/Images/selectors';
-import {
-  getFloorsFilterValue,
-  getFloorsPopupStr,
-  getHeightFilterValue,
-  getHeightPopupStr,
-} from './selectors';
 import * as a from '../actions';
-import { Header, Icon, Label, Popup } from 'semantic-ui-react';
+import { Header, Icon, Label } from 'semantic-ui-react';
 import Segment, { Group } from 'components/Segment';
 import CenteredImage from 'components/CenteredImage';
+import CityTag from './Tags/City';
+import YearTag from './Tags/Year';
+import FloorsTag from './Tags/Floors';
+import HeightTag from './Tags/Height';
 import { push } from 'react-router-redux';
 
-const { Detail: LDetail, Group: LGroup } = Label;
+const { Group: TagGroup } = Label;
 
 export const ItemComponent = (props) => {
   const {
     skyscraper,
-    city,
     goToPage,
     thumb,
     handleMouseEnter,
@@ -28,22 +24,7 @@ export const ItemComponent = (props) => {
   } = props;
   
   const id = skyscraper.get('id');
-
-  const height = skyscraper.get('height', '');
-  const heightUrl = `/?height=${getHeightFilterValue(height)}`;
-  const heightPopup = getHeightPopupStr(height);
-  
-  const floors = skyscraper.get('floors', '');
-  const floorsUrl = `/?floors=${getFloorsFilterValue(floors)}`;
-  const floorsPopup = getFloorsPopupStr(floors);
-  
-  const year = skyscraper.get('year', '');
-  const years = Math.floor(year / 10) * 10;
-  const yearUrl = `/?year=${years}`;
-  
-  const cityUrl = city ? `/?cities=${city.get('id')}` : null;
-  const cityTitle = city ? city.get('title') : null;
-  
+    
   const wiki_url = `https://en.wikipedia.org/wiki/index.html?curid=${skyscraper.get('wikipedia_id')}`;
 
   let elevation = skyscraper.get('active') ? 8 : 2
@@ -62,33 +43,12 @@ export const ItemComponent = (props) => {
         <Header as="h4">{skyscraper.get('title')}</Header>
       </Segment>
       <Segment>
-        <LGroup>
-          
-          <Popup
-            trigger={<Label as="a" href={cityUrl} onClick={goToPage(cityUrl)}><Icon name="location arrow" /> {cityTitle}</Label>}
-            content={<span>See all skyscrapers in <strong>{cityTitle}</strong></span>}
-            hideOnScroll
-          />
-
-          <Popup
-            trigger={<Label as="a" href={yearUrl} onClick={goToPage(yearUrl)}>Year <LDetail>{year}</LDetail></Label>}
-            content={<span>See all skyscrapers built in <strong>{years}</strong>s</span>}
-            hideOnScroll
-          />
-
-          <Popup
-            trigger={<Label as="a" href={floorsUrl} onClick={goToPage(floorsUrl)}> Floors <LDetail>{floors}</LDetail> </Label>}
-            content={floorsPopup}
-            hideOnScroll
-          />
-
-          <Popup
-            trigger={<Label as="a" href={heightUrl} onClick={goToPage(heightUrl)}>Height <LDetail>{height} ft.</LDetail></Label>}
-            content={heightPopup}
-            hideOnScroll
-          />
-
-        </LGroup>
+        <TagGroup>
+          <CityTag skyscraper={skyscraper} goToPage={goToPage} inPopup={popup} />
+          <YearTag skyscraper={skyscraper} goToPage={goToPage} inPopup={popup} />
+          <FloorsTag skyscraper={skyscraper} goToPage={goToPage} inPopup={popup} />
+          <HeightTag skyscraper={skyscraper} goToPage={goToPage} inPopup={popup} />
+        </TagGroup>
       </Segment>
       <Segment>
         <a href={wiki_url} target="_blank" ><Icon name="external"/>Wikipedia</a>
@@ -98,7 +58,6 @@ export const ItemComponent = (props) => {
 };
 
 const mapStateToProps = () => (state, { skyscraper }) => ({
-  city: selectCity(skyscraper.get('parentID'))(state),
   thumb: selectThumbnailForPage(skyscraper.get('wikipedia_id'))(state),
 });
 
