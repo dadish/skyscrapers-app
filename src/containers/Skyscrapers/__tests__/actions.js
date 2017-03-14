@@ -12,6 +12,7 @@ const actionsMap = [
   [ 'hitBottom', 'HIT_BOTTOM' ],
   [ 'showPopup', 'SHOW_POPUP' ],
   [ 'hidePopup', 'HIDE_POPUP' ],
+  [ 'hideAllPopups', 'HIDE_ALL_POPUPS' ],
 ];
 
 actionsMap.forEach(([ actionCreator, constant]) => {

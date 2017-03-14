@@ -24,6 +24,9 @@ const popupsReducer = (state = new List(), action) => {
         return popups.push(popupId);
       }, new List());
 
+    case c.HIDE_ALL_POPUPS:
+      return new List();
+
     default:
       return state;
   }
@@ -53,6 +56,7 @@ const reducer = (state = initialState, action) => {
 
     case c.SHOW_POPUP:
     case c.HIDE_POPUP:
+    case c.HIDE_ALL_POPUPS:
       return state.set('popups', popupsReducer(state.get('popups'), action));
 
     default:

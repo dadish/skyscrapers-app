@@ -50,3 +50,8 @@ export const showPopup = createActionCreator(c.SHOW_POPUP);
  * When the popup hides
  */
 export const hidePopup = createActionCreator(c.HIDE_POPUP);
+
+/**
+ * When user scrolls we close all popups
+ */
+export const hideAllPopups = createActionCreator(c.HIDE_ALL_POPUPS);

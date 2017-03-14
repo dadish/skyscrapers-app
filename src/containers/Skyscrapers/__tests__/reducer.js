@@ -101,3 +101,10 @@ test('removes a popupId from popups on HIDE_POPUP action', () => {
   expect(newState.get('popups').size).toBe(4);
   expect(newState.get('popups').findIndex(it => it === '2')).toBe(-1);
 });
+
+test('empties the popups on HIDE_ALL_POPUPS action', () => {
+  const state = initialState.set('popups', new List(['1', '2', '3', '4', '5']));
+  expect(state.get('popups').size).toBe(5);
+  const newState = reducer(state, a.hideAllPopups());
+  expect(newState.get('popups').size).toBe(0);
+});

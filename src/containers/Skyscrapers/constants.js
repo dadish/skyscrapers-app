@@ -56,3 +56,8 @@ export const SHOW_POPUP = 'skyscrapers/Skyscrapers/SHOW_POPUP';
  * When the popup hides
  */
 export const HIDE_POPUP = 'skyscrapers/Skyscrapers/HIDE_POPUP';
+
+/**
+ * When user scrolls we close all popups
+ */
+export const HIDE_ALL_POPUPS = 'skyscrapers/Skyscrapers/HIDE_ALL_POPUPS';

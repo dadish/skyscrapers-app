@@ -9,14 +9,14 @@ import { empty as empty$ } from 'rxjs/observable/empty';
 import { concat as concat$ } from 'rxjs/observable/concat';
 import { of as of$ } from 'rxjs/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
+import { combineEpics } from 'redux-observable';
 import { ajaxGetImages } from 'containers/Images/actions';
-import {
-  selectFilterSelector,
-} from '../Filter/selectors';
+import { selectFilterSelector } from '../Filter/selectors';
 import {
   selectListTotal,
   selectListLimit,
   selectListStart,
+  selectPopups,
 } from '../selectors';
 import * as c from '../constants';
 import * as a from '../actions';
@@ -48,12 +48,19 @@ const listEpic = (selector = "") =>
       .catch(e => of$(a.ajaxFetchFail(e)))
   );
 
-export const scrollEpic = () =>
-  fromEvent$(window, 'scroll')
-    .filter(() => {
-      return window.scrollY + window.innerHeight >= document.body.scrollHeight - 10;
-    })
-    .mapTo(a.hitBottom())
+export const scrollEpic = combineEpics(
+  // dispatch HIT_BOTTOM action when user get to the bottom
+  // of the list
+  () => fromEvent$(window, 'scroll')
+    .filter(() => window.scrollY + window.innerHeight >= document.body.scrollHeight - 10)
+    .mapTo(a.hitBottom()),
+  
+  // if there are any open popups dispatch HIDE_ALL_POPUPS action when user scrolls the page
+  (_, store) => fromEvent$(window, 'scroll')
+    .filter(() => selectPopups()(store.getState()).size > 0)
+    .mapTo(a.hideAllPopups())
+
+);
 
 export const appendEpic = (action$, store) =>
   action$
