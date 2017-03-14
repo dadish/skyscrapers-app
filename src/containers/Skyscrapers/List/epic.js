@@ -58,7 +58,6 @@ export const scrollEpic = () =>
 export const appendEpic = (action$, store) =>
   action$
     .ofType(c.HIT_BOTTOM)
-    .debounceTime(300)
     .exhaustMap(() => {
       const state = store.getState();
       let selector = selectFilterSelector()(state);
