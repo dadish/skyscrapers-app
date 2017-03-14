@@ -9,16 +9,6 @@ export const initialState = fromJS({
   listLimit: 30,
   listStart: 0,
   listTotal: 0,
-  filter: {
-    keyword: '',
-    city: [],
-    heightMin: false,
-    heigthMax: false,
-    floorsMin: false,
-    floorsMax: false,
-    yearMin: false,
-    yearMax: false,
-  },
 });
 
 const reducer = (state = initialState, action) => {
@@ -35,18 +25,14 @@ const reducer = (state = initialState, action) => {
         .set('listStart', payload.data.skyscraper.listStart)
         .set('list', listReducer(state.get('list'), action));
 
+    case c.AJAX_FETCH_FAIL:
+      return state.set('loading', false);
+
     case c.ACTIVATE_ITEM:
     case c.DEACTIVATE_ITEM:
     case c.RESET_LIST:
       return state.set('list', listReducer(state.get('list'), action));
 
-    case c.AJAX_FETCH_FAIL:
-      return state.set('loading', false);
-
-    case LOCATION_CHANGE:
-      if (payload.action !== 'POP') return state;
-      const keyword = payload.query.keyword || "";
-      return state.set('keyword', keyword);
     default:
       return state;
   }

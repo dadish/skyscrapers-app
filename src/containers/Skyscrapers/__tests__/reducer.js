@@ -5,6 +5,17 @@ import * as a from '../actions';
 
 jest.mock('../List/reducer', () => jest.fn());
 
+const payload = {
+  data: {
+    skyscraper: {
+      listTotal: 1030,
+      listLimit: 40,
+      listStart: 160,
+      list: []
+    }
+  }
+};
+
 test('returns the given state untouched if action type is unknown', () => {
   expect(reducer(initialState, { type: 'unknown' })).toBe(initialState);
 });
@@ -15,19 +26,34 @@ test('sets the `loading` property to `true` on AJAX_FETCH_START action', () => {
 });
 
 test('sets the `loading` property to `false` on AJAX_FETCH_END action', () => {
-  const payload = {
-    data: {
-      skyscraper: {
-        listTotal: 0,
-        listLimit: 30,
-        listStart: 0,
-        list: []
-      }
-    }
-  };
   const state = initialState.set('loading', true);
   expect(state.get('loading')).toBe(true);
   expect(reducer(state, a.ajaxFetchEnd(payload)).get('loading')).toBe(false);
+});
+
+test('updates the `listTotal` property on AJAX_FETCH_END action', () => {
+  expect(initialState.get('listTotal')).toBe(0);
+  const newState = reducer(initialState, a.ajaxFetchEnd(payload));
+  expect(newState.get('listTotal')).toBe(1030);
+});
+
+test('updates the `listLimit` property on AJAX_FETCH_END action', () => {
+  expect(initialState.get('listLimit')).toBe(30);
+  const newState = reducer(initialState, a.ajaxFetchEnd(payload));
+  expect(newState.get('listLimit')).toBe(40);
+});
+
+test('updates the `listStart` property on AJAX_FETCH_END action', () => {
+  expect(initialState.get('listStart')).toBe(0);
+  const newState = reducer(initialState, a.ajaxFetchEnd(payload));
+  expect(newState.get('listStart')).toBe(160);
+});
+
+test('delegates the AJAX_FETCH_END action to ./List/reducer', () => {
+  const lastCallIndex = listReducer.mock.calls.length;
+  reducer(initialState, a.ajaxFetchEnd(payload));
+  expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
+  expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
 });
 
 test('sets the `loading` property to `false` on AJAX_FETCH_FAIL action', () => {
@@ -36,62 +62,9 @@ test('sets the `loading` property to `false` on AJAX_FETCH_FAIL action', () => {
   expect(reducer(state, a.ajaxFetchFail()).get('loading')).toBe(false);
 });
 
-test('updates the keyword according to browser URL query on LOCATION_CHANGE action with POP location action type', () => {
-  const keyword = 'esfkbnma/d,gn aldjxngm';
-  const action = {
-    type: LOCATION_CHANGE,
-    payload: {
-      action: 'POP',
-      query: { keyword }
-    }
-  };
-  expect(reducer(initialState, action).get('keyword')).toBe(keyword);
-});
-
-test('does not react on LOCATION_CHANGE action with location action type other than POP', () => {
-  const keyword = 'esfkbnma/d,gn aldjxngm';
-  const action = {
-    type: LOCATION_CHANGE,
-    payload: {
-      action: 'REPLACE',
-      query: { keyword }
-    }
-  };
-  expect(reducer(initialState, action).get('keyword')).not.toBe(keyword);
-});
-
-test('sets keyword to empty strin on LOCATION_CHANGE action if there is not keyword query parameter', () => {
-  const action = {
-    type: LOCATION_CHANGE,
-    payload: {
-      action: 'POP',
-      query: {}
-    }
-  };
-  const state = initialState.set('keyword', 'askhgjf');
-  expect(reducer(state, action).get('keyword')).toBe("");
-});
-
-test('delegates the AJAX_FETCH_END action to ./List/reducer', () => {
-  const lastCallIndex = listReducer.mock.calls.length;
-  const payload = {
-    data: {
-      skyscraper: {
-        listTotal: 0,
-        listLimit: 30,
-        listStart: 0,
-        list: []
-      }
-    }
-  };
-  reducer(initialState, a.ajaxFetchEnd(payload));
-  expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
-  expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
-});
-
 test('delegates the ACTIVATE_ITEM action to ./List/reducer', () => {
   const lastCallIndex = listReducer.mock.calls.length;
-  const payload = "some lafowrplea";
+  const payload = 1234;
   reducer(initialState, a.activateItem(payload));
   expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
   expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
@@ -99,8 +72,16 @@ test('delegates the ACTIVATE_ITEM action to ./List/reducer', () => {
 
 test('delegates the DEACTIVATE_ITEM action to ./List/reducer', () => {
   const lastCallIndex = listReducer.mock.calls.length;
-  const payload = "s32435947twrplea";
+  const payload = 1234;
   reducer(initialState, a.deactivateItem(payload));
+  expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
+  expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
+});
+
+test('delegates the RESET_LIST action to ./List/reducer', () => {
+  const lastCallIndex = listReducer.mock.calls.length;
+  const payload = [];
+  reducer(initialState, a.resetList(payload));
   expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
   expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
 });
