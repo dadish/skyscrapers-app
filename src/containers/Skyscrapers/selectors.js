@@ -21,3 +21,13 @@ export const selectListStart = () => createSelector(
   selectSkyscrapers(),
   skyscrapers => skyscrapers.get('listStart'),
 );
+
+export const selectPopups = () => createSelector(
+  selectSkyscrapers(),
+  skyscrapers => skyscrapers.get('popups'),
+);
+
+export const selectPopup = (popupId) => createSelector(
+  selectPopups(),
+  popups => popups.findIndex(it => it === popupId) !== -1,
+);
