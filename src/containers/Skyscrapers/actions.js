@@ -40,3 +40,13 @@ export const deactivateItem = createActionCreator(c.DEACTIVATE_ITEM);
  * When the user scrolls down near to end
  */
 export const hitBottom = createActionCreator(c.HIT_BOTTOM);
+
+/**
+ * When the popup shows up
+ */
+export const showPopup = createActionCreator(c.SHOW_POPUP);
+
+/**
+ * When the popup hides
+ */
+export const hidePopup = createActionCreator(c.HIDE_POPUP);

@@ -1,40 +1,21 @@
 import * as a from '../actions';
 import * as c from '../constants';
 
-const actionsMap = {
-  ajaxFetchStart: {
-    method: a.ajaxFetchStart,
-    type: c.AJAX_FETCH_START
-  },
-  ajaxFetchEnd: {
-    method: a.ajaxFetchEnd,
-    type: c.AJAX_FETCH_END
-  },
-  ajaxFetchFail: {
-    method: a.ajaxFetchFail,
-    type: c.AJAX_FETCH_FAIL
-  },
-  initialLoad: {
-    method: a.initialLoad,
-    type: c.INITIAL_LOAD
-  },
-  activateItem: {
-    method: a.activateItem,
-    type: c.ACTIVATE_ITEM
-  },
-  deactivateItem: {
-    method: a.deactivateItem,
-    type: c.DEACTIVATE_ITEM
-  },
-  hitBottom: {
-    method: a.hitBottom,
-    type: c.HIT_BOTTOM
-  },
-};
+const actionsMap = [
+  [ 'resetList', 'RESET_LIST' ],
+  [ 'ajaxFetchStart', 'AJAX_FETCH_START' ],
+  [ 'ajaxFetchEnd', 'AJAX_FETCH_END' ],
+  [ 'ajaxFetchFail', 'AJAX_FETCH_FAIL' ],
+  [ 'initialLoad', 'INITIAL_LOAD' ],
+  [ 'activateItem', 'ACTIVATE_ITEM' ],
+  [ 'deactivateItem', 'DEACTIVATE_ITEM' ],
+  [ 'hitBottom', 'HIT_BOTTOM' ],
+  [ 'showPopup', 'SHOW_POPUP' ],
+  [ 'hidePopup', 'HIDE_POPUP' ],
+];
 
-Object.keys(actionsMap).forEach((methodName) => {
-  const { method, type } = actionsMap[methodName];
-  test(`${methodName}() returns the right type`, () => {
-    expect(method().type).toBe(type);
+actionsMap.forEach(([ actionCreator, constant]) => {
+  test(`actionCreator ${actionCreator} returns the right type`, () => {
+    expect(a[actionCreator]().type).toBe(c[constant]);
   });
 });

@@ -1,6 +1,6 @@
 import reducer, { initialState } from '../reducer';
+import { List } from 'immutable';
 import listReducer from '../List/reducer';
-import { LOCATION_CHANGE } from 'react-router-redux';
 import * as a from '../actions';
 
 jest.mock('../List/reducer', () => jest.fn());
@@ -84,4 +84,20 @@ test('delegates the RESET_LIST action to ./List/reducer', () => {
   reducer(initialState, a.resetList(payload));
   expect(listReducer.mock.calls.length).toBe(lastCallIndex + 1);
   expect(listReducer.mock.calls[lastCallIndex][1].payload).toBe(payload);
+});
+
+test('appends a popupId into popups on SHOW_POPUP action', () => {
+  expect(initialState.get('popups').size).toBe(0);
+  const popupId = '123ewrdf';
+  const newState = reducer(initialState, a.showPopup(popupId));
+  expect(newState.get('popups').size).toBe(1);
+  expect(newState.get('popups').get(0)).toBe(popupId);
+});
+
+test('removes a popupId from popups on HIDE_POPUP action', () => {
+  const state = initialState.set('popups', new List(['1', '2', '3', '4', '5']));
+  expect(state.get('popups').size).toBe(5);
+  const newState = reducer(state, a.hidePopup('2'));
+  expect(newState.get('popups').size).toBe(4);
+  expect(newState.get('popups').findIndex(it => it === '2')).toBe(-1);
 });

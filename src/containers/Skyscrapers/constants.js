@@ -46,3 +46,13 @@ export const DEACTIVATE_ITEM = 'skyscrapers/Skyscrapers/DEACTIVATE_ITEM';
  * When the user scrolls down near to end
  */
 export const HIT_BOTTOM = 'skyscrapers/Skyscrapers/HIT_BOTTOM';
+
+/**
+ * When the popup shows up
+ */
+export const SHOW_POPUP = 'skyscrapers/Skyscrapers/SHOW_POPUP';
+
+/**
+ * When the popup hides
+ */
+export const HIDE_POPUP = 'skyscrapers/Skyscrapers/HIDE_POPUP';
