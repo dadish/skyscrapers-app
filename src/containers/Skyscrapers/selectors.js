@@ -27,7 +27,7 @@ export const selectPopups = () => createSelector(
   skyscrapers => skyscrapers.get('popups'),
 );
 
-export const selectPopup = (popupId) => createSelector(
+export const selectPopupOpen = (popupId) => createSelector(
   selectPopups(),
   popups => popups.findIndex(it => it === popupId) !== -1,
 );

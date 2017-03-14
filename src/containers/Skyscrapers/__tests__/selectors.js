@@ -40,6 +40,6 @@ test('selectListStart() selects [`skyscrapers`, `listStart`]', () => {
 });
 
 test('selectPopupOpen(id) returns boolean depending on if the id is in [`skyscrapers`, `popups`]', () => {
-  expect(s.selectPopup('2')(state)).toBe(true);
-  expect(s.selectPopup('4')(state)).toBe(false);
+  expect(s.selectPopupOpen('2')(state)).toBe(true);
+  expect(s.selectPopupOpen('4')(state)).toBe(false);
 });
