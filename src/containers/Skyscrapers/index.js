@@ -1,6 +1,7 @@
 import React from 'react';
-import List from './List';
 import Filter from './Filter';
+import Summary from './Summary';
+import List from './List';
 import Map from './Map';
 
 const SkyscrapersComponent = () => (
@@ -12,6 +13,7 @@ const SkyscrapersComponent = () => (
     }}
   >
     <Filter />
+    <Summary />
     <List />
     <Map />
   </div>

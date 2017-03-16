@@ -6,7 +6,7 @@ import { selectList } from '../List/selectors';
 import { selectListTotal } from '../selectors';
 
 export const SummaryComponent = ({ total, list }) => (
-  <Segment>Total: {total}, showing: {list.size}</Segment>
+  <Segment raise="2">Total: {total}, showing: {list.size}</Segment>
 );
 
 const mapStateToProps = createStructuredSelector({
