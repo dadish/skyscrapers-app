@@ -14,7 +14,6 @@ import Header from 'containers/Header';
 
 export const App = ({ children }) => (
   <div>
-    <Header />
     {children}
   </div>
 );
