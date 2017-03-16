@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectList } from '../List/selectors';
 import Segment from 'components/Segment';
+import Summary from '../Summary';
 import GoogleMap from 'google-map-react';
 import { activateItem, deactivateItem } from '../actions';
 import Marker from './Marker';
@@ -23,11 +24,12 @@ export const SkyMap = (props) => {
 
   return (
     <div className="map-w">
+      <Summary />
       <Segment
-        raise="1"
+        raise="2"
         style={{
           position: 'absolute',
-          top: '4rem',
+          top: '7rem',
           bottom: '1rem',
           right: '1rem',
           left: '2rem',
