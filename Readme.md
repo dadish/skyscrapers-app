@@ -7,7 +7,7 @@ This is a one way data flow implementation with [React][react] & Redux[redux]. T
 
 Please see the working example at [https://skyscrapers.nurgulyashyrov.com](https://skyscrapers.nurgulyashyrov.com)
 
-[pw-sky]: https://demo.processwire.com
+[pw-sky]: http://demo.processwire.com
 [pw]: https://processwire.com
 [react]: https://facebook.github.io/react/
 [redux]: http://redux.js.org/
