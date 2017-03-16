@@ -10,8 +10,6 @@ import createRoutes from 'setup/routes';
 import 'semantic-ui-css/semantic.css';
 import './style.css';
 
-import Header from 'containers/Header';
-
 export const App = ({ children }) => (
   <div>
     {children}
