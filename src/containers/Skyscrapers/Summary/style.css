@@ -1,8 +1,13 @@
 .smry-w{
   display: flex;  
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 3rem;
+}
+
+.smry-info{
+  display: flex;  
+  justify-content: center;
 }
 
 .smry-lbl{
@@ -15,4 +20,13 @@
   font-size: 1.5rem;
   display: inline-block;
   margin-right: 2rem;
+}
+
+.smry-source{
+  float: right;
+  color: #bbb;
+}
+
+.smry-source:hover{
+  color: #4183C4;
 }
