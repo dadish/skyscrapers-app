@@ -15,6 +15,9 @@ const About = () => (
     <p>
       This is an SPA built for demostration purposes. The app demonstrates how you can create minimal viable product using <a href="https://processwire.com" target="_blank">ProcessWire</a> with <a href="https://github.com/dadish/processgraphql" target="_blank">ProcessGraphQL</a>.
     </p>
+    <p>
+      See the source code at <a href="https://github.com/dadish/Skyscrapers-app" target="_blank">Github</a>.
+    </p>
   </Segment>
 );
 
