@@ -27,7 +27,7 @@ export const SkyMap = (props) => {
         raise="1"
         style={{
           position: 'absolute',
-          top: '3.85rem',
+          top: '4rem',
           bottom: '1rem',
           right: '1rem',
           left: '2rem',

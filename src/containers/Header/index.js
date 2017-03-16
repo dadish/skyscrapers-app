@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectLocationPathname } from 'containers/App/selectors';
 import { push } from 'react-router-redux';
 import { Menu } from 'semantic-ui-react';
-import { elevation8 } from 'components/styles';
+import { elevation10 } from 'components/styles';
 
 export const HeaderComponent = ({ currentPathname, goTo }) => {
   const { Item } = Menu;
@@ -17,7 +17,8 @@ export const HeaderComponent = ({ currentPathname, goTo }) => {
       style={{
         backgroundColor: '#fff',
         borderColor: '#fff',
-        ...elevation8,
+        height: '3rem',
+        ...elevation10,
       }}
     >
       <Item name="home" active={currentPathname === '/'} onClick={goTo('/')}>Home</Item>
