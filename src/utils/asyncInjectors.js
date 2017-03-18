@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import isObject from 'lodash/isObject';
 import isString from 'lodash/isString';
+import has from 'lodash/has';
 import invariant from 'invariant';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -39,7 +40,7 @@ export function injectAsyncReducer(store, isValid) {
       '(src/utils...) injectAsyncReducer: Expected `asyncReducer` to be a reducer function'
     );
 
-    if (Reflect.has(store.asyncReducers, name)) return;
+    if (has(store.asyncReducers, name)) return;
 
     store.asyncReducers[name] = asyncReducer; // eslint-disable-line no-param-reassign
     store.replaceReducer(createReducer(store.asyncReducers));
@@ -58,7 +59,7 @@ export function injectAsyncEpic(store, isValid) {
       '(src/utils...) injectAsyncEpic: Expected `asyncEpic` to be an epic function'
     );
 
-    if (Reflect.has(store.asyncEpics, name)) return;
+    if (has(store.asyncEpics, name)) return;
     store.asyncEpics[name] = asyncEpic; // eslint-disable-line no-param-reassign
     store.epic$.next(asyncEpic);
   };
