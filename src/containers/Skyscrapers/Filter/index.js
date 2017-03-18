@@ -18,7 +18,7 @@ import { selectLoading } from '../selectors';
 const { Field: SemanticField, Group: SemanticGroup } = SemanticForm;
 
 export const FilterComponent = ({ heightOptions, yearOptions, floorsOptions, cityOptions, loading }) => (
-  <Segment raise="2" loading={loading}>
+  <Segment raise="2" loading={loading} style={{ zIndex: 10 }}>
     <SemanticForm>
       <SemanticGroup widths='equal'>
         <SemanticField>
