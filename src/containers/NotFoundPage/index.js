@@ -1,9 +1,19 @@
 import React from 'react';
+import Segment from 'components/Segment';
 
 const NotFound = () => (
-  <div className="pg-w">
+  <Segment
+    raise="2"
+    style={{
+      maxWidth: '700px',
+      margin: '2rem auto',
+      padding: '2rem 1rem',
+      backgroundColor: '#fff',
+      textAlign: 'center',
+    }}
+  >
     <h1>404 Not Found</h1>
-  </div>
+  </Segment>
 );
 
 export default NotFound;
