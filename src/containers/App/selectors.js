@@ -1,5 +1,12 @@
 import { createSelector } from 'reselect';
 
+export const selectApp = () => state => state.get('app')
+
+export const selectWindowWidth = () => createSelector(
+  selectApp(),
+  app => app.get('windowWidth')
+)
+
 export const selectRoute = () => state => state.get('route');
 
 export const selectLocation = () => createSelector(

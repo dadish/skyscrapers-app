@@ -2,16 +2,17 @@
  * Create the store with asynchronously loaded reducers
  */
 
-import { createStore, applyMiddleware, compose } from 'redux';
-import { fromJS } from 'immutable';
-import { routerMiddleware } from 'react-router-redux';
-import { createEpicMiddleware } from 'redux-observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/do';
-import createReducer from './reducers';
+import { createStore, applyMiddleware, compose } from 'redux'
+import { fromJS } from 'immutable'
+import { routerMiddleware } from 'react-router-redux'
+import { createEpicMiddleware } from 'redux-observable'
+import { ReplaySubject } from 'rxjs/ReplaySubject'
+import 'rxjs/add/operator/mergeMap'
+import 'rxjs/add/operator/filter'
+import 'rxjs/add/operator/mapTo'
+import 'rxjs/add/operator/do'
+import createReducer from './reducers'
+import appEpic from 'containers/App/epic'
 
 export default function configureStore(initialState = {}, history) {
   
@@ -61,6 +62,9 @@ export default function configureStore(initialState = {}, history) {
   store.epic$ = epic$; // epics injector
   store.asyncEpics = {}; // Epics registry
   store.asyncReducers = {}; // Async reducer registry
+
+  // bafore anything, inject the global/app epic
+  epic$.next(appEpic)
 
   return store;
 }

@@ -1,4 +1,4 @@
-import { selectFloorsOptions, selectHeightOptions } from '../Filter/selectors';
+import { selectFloorsOptions, selectHeightOptions } from '../Filter/selectors'
 
 export const getFloorsPopupStr = (floors) => {
   const prefix = 'See all skyscrapers';

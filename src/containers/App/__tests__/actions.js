@@ -1,14 +1,20 @@
 import {
-  PAGE_LOADED
+  PAGE_LOADED,
+  WINDOW_RESIZE,
 } from '../constants';
 import {
   pageLoaded,
+  windowResize,
 } from '../actions'
 
 const actionsMap = {
   pageLoaded: {
     method: pageLoaded,
     type: PAGE_LOADED,
+  },
+  windowResize: {
+    method: windowResize,
+    type: WINDOW_RESIZE,
   }
 };
 
